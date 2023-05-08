@@ -1,0 +1,36 @@
+name: "pull_request"
+
+on:
+  pull_request:
+    branches:
+      - "main"
+  workflow_dispatch:
+
+jobs:
+  main:
+    defaults:
+      run:
+        shell: "bash"
+    permissions:
+      contents: "read"
+    runs-on: "${{ matrix.os }}"
+    strategy:
+      fail-fast: false
+      matrix:
+        directory:
+          - "tests/unit"
+        os:
+          - "ubuntu-latest"
+        python-version:
+          - "3.8"
+          - "3.9"
+          - "3.10"
+          - "3.11"
+    steps:
+      - uses: "actions/checkout@v3"
+      - uses: "actions/setup-python@v4"
+        with:
+          python-version: "${{ matrix.python-version }}"
+      - run: |
+          pip install \
+          -r requirements-dev.txt
