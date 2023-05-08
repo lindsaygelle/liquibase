@@ -1,4 +1,4 @@
-# pylint: disable=C0114
+# pylint: disable=C0103,R,C0114
 from typing import Literal, TypedDict
 
 
