@@ -23,7 +23,7 @@ LONG_DESCRIPTION_CONTENT_TYPE = "text/markdown"
 MAINTAINER: str = AUTHOR
 MAINTAINER_EMAIL: Optional[str] = AUTHOR_EMAIL
 NAME: str = "liquibase"
-PACKAGE_DIR: Dict[str, str] = {NAME: NAME}
+PACKAGE_DIR: Dict[str, str] = {NAME: "src"}
 PACKAGES: List[str] = [NAME]
 # noqa: E501
 PROJECT_URLS: Dict[str, str] = {
