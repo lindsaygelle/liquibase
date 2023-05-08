@@ -1,0 +1,35 @@
+repos:
+  - repo: 'https://github.com/pre-commit/pre-commit-hooks'
+    rev: v4.3.0
+    hooks:
+      - id: check-yaml
+        files: |
+          (?x)^.*(\.yaml|\.yml)$
+      - id: end-of-file-fixer
+        exclude: |
+          (?x)^requirements.*(\.txt)$
+      - id: trailing-whitespace
+  - repo: 'https://github.com/asottile/pyupgrade'
+    rev: v2.34.0
+    hooks:
+      - id: pyupgrade
+        args:
+          - '--py36-plus'
+        files: |
+          (?x)^.*(\.py)$
+  - repo: 'https://github.com/psf/black'
+    rev: 22.3.0
+    hooks:
+      - id: black
+        files: |
+          (?x)^.*(\.py)$
+  - repo: https://github.com/pycqa/pylint
+    rev: v2.17.4
+    hooks:
+      - id: pylint
+        files: |
+          (?x)^.*(\.py)$
+  - repo: 'https://github.com/codespell-project/codespell'
+    rev: v2.1.0
+    hooks:
+      - id: codespell
