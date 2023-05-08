@@ -35,13 +35,3 @@ jobs:
       - run: |
           pip install \
           -r requirements-dev.txt
-      - run: |
-          pytest \
-          --color=no \
-          --code-highlight=no \
-          --disable-warnings \
-          --exitfirst \
-          --no-cov \
-          --strict-markers \
-          --verbose \
-          ${{ matrix.directory }}

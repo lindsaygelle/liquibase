@@ -1,5 +1,5 @@
 # pylint: disable=C0114
-from typing import TypedDict
+from typing import Literal, TypedDict
 
 
 class CheckConstraint(TypedDict):
@@ -20,3 +20,83 @@ class AddCheckConstraint(TypedDict):
     """
 
     addCheckConstraint: CheckConstraint
+
+
+ForeignKeyAction = Literal[
+    "CASCADE", "NO ACTION", "SET NULL", "SET DEFAULT", "RESTRICT"
+]
+
+
+class ForeignKeyConstraint(TypedDict):
+    """Permitted attributes for `AddForeignKeyConstraint.addForeignKeyConstraint`."""
+
+    baseColumnNames: str
+    baseTableCatalogName: str
+    baseTableName: str
+    baseTableSchemaName: str
+    constraintName: str
+    deferrable: bool
+    foreignKeyName: str
+    initiallyDeferred: bool
+    onDelete: ForeignKeyAction
+    onUpdate: ForeignKeyAction
+    referencedColumnNames: str
+    referencedTableCatalogName: str
+    referencedTableName: str
+    referencedTableSchemaName: str
+    validate: bool
+
+
+class AddForeignKeyConstraint(TypedDict):
+    # pylint: disable=C0301
+    """Permitted attributes for change
+    [addForeignKeyConstraint](https://docs.liquibase.com/change-types/add-foreign-key-constraint.html).
+    """
+
+    addForeignKeyConstraint: ForeignKeyConstraint
+
+
+class NotNullConstraint(TypedDict):
+    """Permitted attributes for `AddNotNullConstraint.addNotNullConstraint`."""
+
+    catalogName: str
+    columnDataType: str
+    columnName: str
+    constraintName: str
+    defaultNullValue: str
+    schemaName: str
+    tableName: str
+    validate: bool
+
+
+class AddNotNullConstraint(TypedDict):
+    # pylint: disable=C0301
+    """Permitted attributes for change
+    [addNotNullConstraint](https://docs.liquibase.com/change-types/add-not-null-constraint.html).
+    """
+
+    addNotNullConstraint: NotNullConstraint
+
+
+class PrimaryKey(TypedDict):
+    """Permitted attributes for `AddPrimaryKey.addPrimaryKey`."""
+
+    catalogName: str
+    clustered: bool
+    columnNames: str
+    constraintName: str
+    forIndexCatalogName: str
+    forIndexName: str
+    forIndexSchemaName: str
+    schemaName: str
+    tableName: str
+    tablespace: str
+    validate: bool
+
+
+class AddPrimaryKey(TypedDict):
+    """Permitted attributes for change
+    [addPrimaryKey](https://docs.liquibase.com/change-types/add-primary-key.html).
+    """
+
+    addPrimaryKey: PrimaryKey

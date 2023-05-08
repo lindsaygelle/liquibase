@@ -31,7 +31,7 @@ PROJECT_URLS: Dict[str, str] = {
     "Documentation": f"https://github.com/{GITHUB_AUTHOR}/{GITHUB_REPOSITORY}",
     "Source Code": f"https://github.com/{GITHUB_AUTHOR}/{GITHUB_REPOSITORY}",
 }
-PYTHON_REQUIRES: str = ">=3.8"
+PYTHON_REQUIRES: str = ">=3.7"
 URL: str = f"https://www.github.com/{GITHUB_AUTHOR}/{GITHUB_REPOSITORY}"
 VERSION = "1.0.0"
 
