@@ -33,9 +33,13 @@ ChangeEntity = Union[
 
 Changes = Union[ChangeConstraint, ChangeEntity]
 
+PreCondition = Dict[str, Dict[str, Dict[str, Any]]]
+
 ObjectQuotingStrategy = Literal[
     "LEGACY", "QUOTE_ALL_OBJECTS", "QUOTE_ONLY_RESERVED_WORDS"
 ]
+
+Rollback = Dict[str, Dict[str, Dict[str, Any]]]
 
 RunOrder = Literal["first", "last"]
 
@@ -45,6 +49,7 @@ class ChangeSetAttributes(TypedDict):
 
     author: str
     changes: List[Changes]
+    comment: Optional[str]
     contextFilter: Optional[str]
     created: Optional[str]
     dbms: Optional[str]
@@ -54,11 +59,14 @@ class ChangeSetAttributes(TypedDict):
     labels: Optional[str]
     logicalFilePath: Optional[str]
     objectQuotingStrategy: Optional[ObjectQuotingStrategy]
+    preConditions: List[PreCondition]
+    rollback: Optional[Rollback]
     runAlways: Optional[bool]
     runInTransaction: Optional[bool]
     runOnChange: Optional[bool]
     runOrder: Optional[RunOrder]
     runWith: Optional[miscellaneous.RunWith]
+    validCheckSum: Optional[str]
 
 
 class ChangeSet(TypedDict):
@@ -67,9 +75,6 @@ class ChangeSet(TypedDict):
     """
 
     changeSet: ChangeSetAttributes
-
-
-PreCondition = Dict[str, Dict[str, Dict[str, Any]]]
 
 
 class Property(TypedDict):
