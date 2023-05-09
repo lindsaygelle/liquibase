@@ -1,8 +1,7 @@
 # pylint: disable=C0103,R,C0114
 from typing import List, Literal, Optional, TypedDict
 
-# pylint: disable=E0401
-import entity
+from liquibase import entity
 
 
 class LookupTable(TypedDict):

@@ -37,3 +37,6 @@ jobs:
       - run: |
           python setup.py build \
           --dry-run --verbose
+      - run: |
+          python -m unittest discover \
+          -s tests -p *_test.py

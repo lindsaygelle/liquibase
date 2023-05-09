@@ -1,11 +1,10 @@
 # pylint: disable=C0103,R,C0114
 from typing import Any, Dict, List, Literal, Optional, TypedDict, Union
 
-# pylint: disable=E0401
-import constraint
-import data
-import entity
-import miscellaneous
+from liquibase import constraint
+from liquibase import data
+from liquibase import entity
+from liquibase import miscellaneous
 
 ChangeConstraint = Union[
     constraint.AddCheckConstraint,
