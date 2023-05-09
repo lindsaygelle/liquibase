@@ -1,5 +1,5 @@
 # pylint: disable=C0103,R,C0114
-from typing import List, TypedDict
+from typing import List, Literal, TypedDict
 from . import entity
 
 
@@ -81,13 +81,29 @@ class Insert(TypedDict):
     insert: InsertAttributes
 
 
+ColumnType = Literal[
+    "BLOB",
+    "BOOLEAN",
+    "CLOB",
+    "COMPUTED",
+    "DATE",
+    "NUMERIC",
+    "OTHER",
+    "SEQUENCE",
+    "SKIP",
+    "STRING",
+    "UNKNOWN",
+    "UUID",
+]
+
+
 class ColumnAttributes(TypedDict):
     """Permitted attributes for `Colum.column`."""
 
     header: str
     index: int
     name: str
-    type: str
+    type: ColumnType
 
 
 class Column(TypedDict):
@@ -96,8 +112,8 @@ class Column(TypedDict):
     column: ColumnAttributes
 
 
-class LoadDataAttributes(TypedDict):
-    """Permitted attributes for `LoadData.loadData`."""
+class LoadAttributes(TypedDict):
+    """Common attributes for `LoadDataAttributes`, `LoadUpdateDataAttributes`."""
 
     catalogName: str
     columns: List[Column]
@@ -112,9 +128,67 @@ class LoadDataAttributes(TypedDict):
     usePreparedStatements: bool
 
 
+class LoadDataAttributes(LoadAttributes):
+    """Permitted attributes for `LoadData.loadData`."""
+
+    onlyUpdate: bool
+    primaryKey: bool
+
+
 class LoadData(TypedDict):
     """Permitted attributes for change
     [loadData](https://docs.liquibase.com/change-types/load-data.html).
     """
 
     loadData: LoadDataAttributes
+
+
+class LoadUpdateDataAttributes(LoadAttributes):
+    """Permitted attributes for `LoadUpdateData.loadUpdateData`."""
+
+
+class LoadUpdateData(TypedDict):
+    """Permitted attributes for change
+    [loadUpdateData](https://docs.liquibase.com/change-types/load-update-data.html).
+    """
+
+    loadUpdateData: LoadUpdateDataAttributes
+
+
+class MergeColumn(TypedDict):
+    """Permitted attributes for `MergeColumns.mergeColumns`."""
+
+    catalogName: str
+    column1Name: str
+    column2Name: str
+    finalColumnName: str
+    finalColumnType: str
+    joinString: str
+    schemaName: str
+    tableName: str
+
+
+class MergeColumns(TypedDict):
+    """Permitted attributes for change
+    [mergeColumns](https://docs.liquibase.com/change-types/merge-columns.html).
+    """
+
+    mergeColumns: MergeColumn
+
+
+class ModifyData(TypedDict):
+    """Permitted attributes for `ModifyDataType.modifyDataType`."""
+
+    catalogName: str
+    columnName: str
+    newDataType: str
+    schemaName: str
+    tableName: str
+
+
+class ModifyDataType(TypedDict):
+    """Permitted attributes for change
+    [modifyDataType](https://docs.liquibase.com/change-types/modify-data-type.html).
+    """
+
+    modifyDataType: ModifyData
