@@ -23,7 +23,7 @@ LONG_DESCRIPTION_CONTENT_TYPE = "text/markdown"
 MAINTAINER: str = AUTHOR
 MAINTAINER_EMAIL: Optional[str] = AUTHOR_EMAIL
 NAME: str = "liquibase"
-PACKAGE_DIR: Dict[str, str] = {NAME: "src"}
+PACKAGE_DIR: Dict[str, str] = {NAME: NAME}
 PACKAGES: List[str] = [NAME]
 # noqa: E501
 PROJECT_URLS: Dict[str, str] = {
@@ -31,7 +31,7 @@ PROJECT_URLS: Dict[str, str] = {
     "Documentation": f"https://github.com/{GITHUB_AUTHOR}/{GITHUB_REPOSITORY}",
     "Source Code": f"https://github.com/{GITHUB_AUTHOR}/{GITHUB_REPOSITORY}",
 }
-PYTHON_REQUIRES: str = ">=3.7"
+PYTHON_REQUIRES: str = ">=3.8"
 URL: str = f"https://www.github.com/{GITHUB_AUTHOR}/{GITHUB_REPOSITORY}"
 VERSION = "1.0.0"
 
