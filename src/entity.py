@@ -93,6 +93,28 @@ class AddColumn(TypedDict):
     tableName: str
 
 
+class Sequence(TypedDict):
+    """Permitted attributes for `AlterSequence.alterSequence`."""
+
+    cacheSize: int
+    catalogName: str
+    cycle: bool
+    dataType: str
+    incrementBy: int
+    maxValue: int
+    minValue: int
+    ordered: bool
+    schemaName: str
+    sequenceName: str
+
+
+class AlterSequence(TypedDict):
+    """Permitted attributes for change
+    [alterSequence](https://docs.liquibase.com/change-types/alter-sequence.html)."""
+
+    alterSequence: Sequence
+
+
 class Function(TypedDict):
     """Permitted attributes for `CreateFunction.createFunction`."""
 
@@ -140,6 +162,97 @@ class CreateIndex(TypedDict):
     [createIndex](https://docs.liquibase.com/change-types/create-index.html)."""
 
     createIndex: Index
+
+
+class Package(TypedDict):
+    """Permitted attributes for `CreatePackage.createPackage`."""
+
+    catalogName: str
+    dbms: str
+    encoding: str
+    packageName: str
+    packageText: str
+    path: str
+    relativeToChangelogFile: bool
+    replaceIfExists: bool
+    schemaName: str
+
+
+class CreatePackage(TypedDict):
+    """Permitted attributes for change
+    [createPackage](https://docs.liquibase.com/change-types/create-package.html)."""
+
+    createPackage: Package
+
+
+class PackageBody(TypedDict):
+    """Permitted attributes for `CreatePackageBody.createPackageBody`."""
+
+    catalogName: str
+    dbms: str
+    encoding: str
+    packageBodyName: str
+    packageBodyText: str
+    path: str
+    relativeToChangelogFile: bool
+    replaceIfExists: bool
+    schemaName: str
+
+
+class CreatePackageBody(TypedDict):
+    """Permitted attributes for change
+    [createPackageBody](https://docs.liquibase.com/change-types/create-package-body.html).
+    """
+
+    createPackageBody: PackageBody
+
+
+class Procedure(TypedDict):
+    """Permitted attributes for `CreateProcedure.createProcedure`."""
+
+    catalogName: str
+    dbms: str
+    encoding: str
+    path: str
+    procedureBody: str
+    procedureName: str
+    relativeToChangelogFile: bool
+    replaceIfExists: bool
+    schemaName: str
+
+
+class CreateProcedure(TypedDict):
+    """Permitted attributes for change
+    [createProcedure](https://docs.liquibase.com/change-types/create-procedure.html).
+    """
+
+    createProcedure: Procedure
+
+
+class CreateSequence(TypedDict):
+    """Permitted attributes for change
+    [createSequence](https://docs.liquibase.com/change-types/create-sequence.html).
+    """
+
+    createSequence: Sequence
+
+
+class Synonym(TypedDict):
+    """Permitted attributes for `CreateSynonym.createSynonym`."""
+
+    objectName: str
+    objectType: str
+    private: bool
+    replaceIfExists: bool
+    synonymName: str
+
+
+class CreateSynonym(TypedDict):
+    """Permitted attributes for change
+    [createSynonym](https://docs.liquibase.com/change-types/create-synonym.html).
+    """
+
+    createSynonym: Synonym
 
 
 class TableColumn(TypedDict):
