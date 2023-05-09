@@ -55,6 +55,113 @@ DatabaseChangeLog(
 
 Of course, you can combine the models with any standard Python function to generate a bulk of tables, views, or functions based on your own requirements!
 
+```python
+# Import the required changes.
+from liquibase.change import (
+    ChangeSet,
+    ChangeSetAttributes,
+    DatabaseChangeLog,
+)
+# Import the required change properties. Here I am creating some tables.
+from liquibase.entity import Column, ColumnConstraint, CreateTable, Table, TableColumn
+
+# Anything else to make the change!
+import semver
+
+AUTHOR = "example"
+version = semver.version.Version(major=0, minor=0, patch=0)
+
+# Create the container to store all the change logs.
+change_logs = []
+
+# Create the database change log. Liquibase requires this.
+database_change_log = DatabaseChangeLog(databaseChangeLog=change_logs)
+
+for i in [1, 2, 3]:
+    table_name = f"table_{i}"
+    version = version.bump_major()
+
+    # Create the container for the changes for the change set.
+    change_set_attributes_changes = [
+
+        CreateTable(
+            createTable=Table(
+                columns=[
+                    TableColumn(
+                        column=Column(
+                            autoIncrement=True,
+                            constraints=ColumnConstraint(
+                                primaryKey=True,
+                                primaryKeyName="pk_id",
+                                referencedColumnNames="id",
+                                referencedTableName=table_name,
+                            ),
+                            name="id",
+                            type="INT",
+                        )
+                    )
+                ],
+                tableName=table_name,
+            )
+        )
+    ]
+
+    # Create the attributes for the change set.
+    change_set_attributes = ChangeSetAttributes(
+        author=AUTHOR, changes=change_set_attributes_changes, id=f"{version}"
+    )
+    # Create the change set. Change sets are required for entity changes.
+    change_set = ChangeSet(changeSet=change_set_attributes)
+
+    # Add change to the database change log.
+    change_logs.append(change_set)
+```
+
+Don't forget the dump the results:
+
+```python
+import json
+
+print(json.dumps(database_change_log, indent=4, sort_keys=True))
+```
+
+Output for Liquibase to use:
+
+```json
+{
+    "databaseChangeLog": [
+        {
+            "changeSet": {
+                "author": "example",
+                "changes": [
+                    {
+                        "createTable": {
+                            "columns": [
+                                {
+                                    "column": {
+                                        "autoIncrement": true,
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "primaryKeyName": "pk_id",
+                                            "referencedColumnNames": "id",
+                                            "referencedTableName": "table_3"
+                                        },
+                                        "name": "id",
+                                        "type": "INT"
+                                    }
+                                }
+                            ],
+                            "tableName": "table_3"
+                        }
+                    }
+                ],
+                "id": "3.0.0"
+            }
+        }
+    ]
+}
+```
+
 ## Notices
 Liquibase is based on the [documentation](https://docs.liquibase.com/) by the Liquibase developers. It is not maintained by their core team and is an experimental project. I authored the code so that I could simplify writing changelogs in Python. Because of that, the classes provided may not always match what is found in the Liquibase core code. If that doesn't bother you and you wish to extend the code found here, awesome! Happy developing.
 

@@ -3,6 +3,7 @@ from typing import Any, Dict, List, Literal, Optional, TypedDict, Union
 
 # pylint: disable=E0401
 import constraint
+import data
 import entity
 import miscellaneous
 
@@ -13,6 +14,18 @@ ChangeConstraint = Union[
     constraint.AddPrimaryKey,
     constraint.AddUniqueConstraint,
 ]
+
+ChangeData = Union[
+    data.AddLookupTable,
+    data.Delete,
+    data.Insert,
+    data.LoadData,
+    data.LoadUpdateData,
+    data.MergeColumns,
+    data.ModifyDataType,
+    data.Update,
+]
+
 
 ChangeEntity = Union[
     entity.AddAutoIncrement,
@@ -30,19 +43,7 @@ ChangeEntity = Union[
     entity.CreateView,
 ]
 
-ChangeMiscellaneous = Union[
-    miscellaneous.AddLookupTable,
-    miscellaneous.Delete,
-    miscellaneous.Insert,
-    miscellaneous.LoadData,
-    miscellaneous.LoadUpdateData,
-    miscellaneous.MergeColumns,
-    miscellaneous.ModifyDataType,
-    miscellaneous.Update,
-]
-
-
-Changes = Union[ChangeConstraint, ChangeEntity, ChangeMiscellaneous]
+Changes = Union[ChangeConstraint, ChangeData, ChangeEntity]
 
 PreCondition = Dict[str, Dict[str, Dict[str, Any]]]
 
@@ -99,15 +100,22 @@ class Property(TypedDict):
     value: str
 
 
-class ChangeLog(TypedDict):
-    """Permitted attributes for `DatabaseChangeLog.databaseChangeLog[*]`."""
+class PreConditions(TypedDict):
+    """Permitted attributes for
+    [preConditions](https://docs.liquibase.com/concepts/changelogs/preconditions.html).
+    """
 
-    changeSet: Optional[ChangeSet]
-    preConditions: Optional[List[PreCondition]]
-    property: Optional[Property]
-    include: Optional[miscellaneous.Include]
-    includeAll: Optional[miscellaneous.IncludeAll]
-    modifyChangeSets: Optional[List[miscellaneous.ModifyChangeSets]]
+    preConditions: List[PreCondition]
+
+
+ChangeLog = Union[
+    ChangeSet,
+    PreConditions,
+    Property,
+    miscellaneous.Include,
+    miscellaneous.IncludeAll,
+    miscellaneous.ModifyChangeSets,
+]
 
 
 class DatabaseChangeLog(TypedDict):
