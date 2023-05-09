@@ -53,7 +53,46 @@ DatabaseChangeLog(
 )
 ```
 
-Of course, you can combine the models with any standard Python function to generate a bulk of tables, views, or functions based on your own requirements!
+You can also create more complex changes using Python code, such as modifying a column with a default value:
+
+```python
+from liquibase.change import ModifyDataType
+from liquibase.entity import Column, TableColumn
+
+ModifyDataType(
+    tableName="animals",
+    columnName="name",
+    newDataType=Column(
+        name="name",
+        value="VARCHAR(255)",
+        defaultValue="default_name",
+    ),
+    columns=[TableColumn(column=Column(name="id", value="INT"))],
+)
+```
+
+Or creating an index:
+
+```python
+from liquibase.change import AddIndex
+from liquibase.entity import Column, Index, TableColumn
+
+AddIndex(
+    tableName="animals",
+    index=Index(
+        columns=[
+            TableColumn(column=Column(name="id", value="INT")),
+            TableColumn(column=Column(name="name", value="VARCHAR(255)")),
+        ],
+        indexName="animals_name_idx",
+        schemaName="public",
+        tableName="animals",
+        unique=False,
+    ),
+)
+```
+
+Of course, you can combine these changes with any standard Python function to generate a bulk of tables, views, or functions based on your own requirements!
 
 ```python
 # Import the required changes.
