@@ -1,6 +1,6 @@
 # pylint: disable=C0103,R,C0114
 from typing import List, TypedDict
-from .entity import Column
+from . import entity
 
 
 class LookupTable(TypedDict):
@@ -67,7 +67,7 @@ class InsertAttributes(TypedDict):
     """Permitted attributes for `Insert.insert`."""
 
     catalogName: str
-    columns: List[Column]
+    columns: List[entity.Column]
     dbms: str
     schemaName: str
     tableName: str
@@ -79,3 +79,42 @@ class Insert(TypedDict):
     """
 
     insert: InsertAttributes
+
+
+class ColumnAttributes(TypedDict):
+    """Permitted attributes for `Colum.column`."""
+
+    header: str
+    index: int
+    name: str
+    type: str
+
+
+class Column(TypedDict):
+    """Permitted attributes for `[LoadDataAttributes | LoadUpdateDataAttributes].columns[*]`."""
+
+    column: ColumnAttributes
+
+
+class LoadDataAttributes(TypedDict):
+    """Permitted attributes for `LoadData.loadData`."""
+
+    catalogName: str
+    columns: List[Column]
+    commentLineStartsWith: str
+    encoding: str
+    file: str
+    quotchar: str
+    relativeToChangelogFile: bool
+    schemaName: str
+    separator: str
+    tableName: str
+    usePreparedStatements: bool
+
+
+class LoadData(TypedDict):
+    """Permitted attributes for change
+    [loadData](https://docs.liquibase.com/change-types/load-data.html).
+    """
+
+    loadData: LoadDataAttributes
