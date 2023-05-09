@@ -330,4 +330,4 @@ class CreateView(TypedDict):
     """Permitted attributes for change
     [createView](https://docs.liquibase.com/change-types/create-view.html)."""
 
-    views: List[View]
+    view: View
