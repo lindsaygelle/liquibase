@@ -1,17 +1,17 @@
 # pylint: disable=C0103,R,C0114
-from typing import Literal, TypedDict
+from typing import Literal, Optional, TypedDict
 
 
 class CheckConstraint(TypedDict):
     """Permitted attributes for `AddCheckConstraint.addCheckConstraint`."""
 
-    catalogName: str
+    catalogName: Optional[str]
     constraintBody: str
     constraintName: str
-    disabled: bool
-    schemaName: str
+    disabled: Optional[bool]
+    schemaName: Optional[str]
     tableName: str
-    validate: bool
+    validate: Optional[bool]
 
 
 class AddCheckConstraint(TypedDict):
@@ -20,6 +20,31 @@ class AddCheckConstraint(TypedDict):
     """
 
     addCheckConstraint: CheckConstraint
+
+
+class DefaultValue(TypedDict):
+    """Permitted attributes for `AddDefaultValue.defaultValue`."""
+
+    catalogName: Optional[str]
+    columnDataType: str
+    columnName: str
+    defaultValue: Optional[str]
+    defaultValueBoolean: Optional[bool]
+    defaultValueComputed: Optional[str]
+    defaultValueConstraintName: Optional[str]
+    defaultValueDate: Optional[str]
+    defaultValueNumeric: Optional[int]
+    defaultValueSequenceNext: Optional[str]
+    schemaName: Optional[str]
+    tableName: str
+
+
+class AddDefaultValue(TypedDict):
+    """Permitted attributes for change
+    [addCheckConstraint](https://docs.liquibase.com/change-types/add-default-value.html).
+    """
+
+    addDefaultValue: DefaultValue
 
 
 ForeignKeyAction = Literal[
@@ -31,20 +56,19 @@ class ForeignKeyConstraint(TypedDict):
     """Permitted attributes for `AddForeignKeyConstraint.addForeignKeyConstraint`."""
 
     baseColumnNames: str
-    baseTableCatalogName: str
+    baseTableCatalogName: Optional[str]
     baseTableName: str
-    baseTableSchemaName: str
+    baseTableSchemaName: Optional[str]
     constraintName: str
-    deferrable: bool
-    foreignKeyName: str
-    initiallyDeferred: bool
-    onDelete: ForeignKeyAction
-    onUpdate: ForeignKeyAction
+    deferrable: Optional[bool]
+    initiallyDeferred: Optional[bool]
+    onDelete: Optional[ForeignKeyAction]
+    onUpdate: Optional[ForeignKeyAction]
     referencedColumnNames: str
-    referencedTableCatalogName: str
+    referencedTableCatalogName: Optional[str]
     referencedTableName: str
-    referencedTableSchemaName: str
-    validate: bool
+    referencedTableSchemaName: Optional[str]
+    validate: Optional[bool]
 
 
 class AddForeignKeyConstraint(TypedDict):
@@ -59,14 +83,14 @@ class AddForeignKeyConstraint(TypedDict):
 class NotNullConstraint(TypedDict):
     """Permitted attributes for `AddNotNullConstraint.addNotNullConstraint`."""
 
-    catalogName: str
+    catalogName: Optional[str]
     columnDataType: str
     columnName: str
-    constraintName: str
-    defaultNullValue: str
-    schemaName: str
+    constraintName: Optional[str]
+    defaultNullValue: Optional[str]
+    schemaName: Optional[str]
     tableName: str
-    validate: bool
+    validate: Optional[bool]
 
 
 class AddNotNullConstraint(TypedDict):
@@ -81,17 +105,17 @@ class AddNotNullConstraint(TypedDict):
 class PrimaryKey(TypedDict):
     """Permitted attributes for `AddPrimaryKey.addPrimaryKey`."""
 
-    catalogName: str
-    clustered: bool
+    catalogName: Optional[str]
+    clustered: Optional[bool]
     columnNames: str
-    constraintName: str
-    forIndexCatalogName: str
-    forIndexName: str
-    forIndexSchemaName: str
-    schemaName: str
+    constraintName: Optional[str]
+    forIndexCatalogName: Optional[str]
+    forIndexName: Optional[str]
+    forIndexSchemaName: Optional[str]
+    schemaName: Optional[str]
     tableName: str
-    tablespace: str
-    validate: bool
+    tablespace: Optional[str]
+    validate: Optional[bool]
 
 
 class AddPrimaryKey(TypedDict):
@@ -105,20 +129,20 @@ class AddPrimaryKey(TypedDict):
 class UniqueConstraint(TypedDict):
     """Permitted attributes for `AddUniqueConstraint.addUniqueConstraint`."""
 
-    catalogName: str
-    clustered: bool
+    catalogName: Optional[str]
+    clustered: Optional[bool]
     columnNames: str
-    constraintName: str
-    deferrable: bool
-    disabled: bool
-    forIndexCatalogName: str
-    forIndexName: str
-    forIndexSchemaName: str
-    initiallyDeferred: bool
-    schemaName: str
-    tableName: str
-    tablespace: str
-    validate: bool
+    constraintName: Optional[str]
+    deferrable: Optional[bool]
+    disabled: Optional[bool]
+    forIndexCatalogName: Optional[str]
+    forIndexName: Optional[str]
+    forIndexSchemaName: Optional[str]
+    initiallyDeferred: Optional[bool]
+    schemaName: Optional[str]
+    tableName: Optional[str]
+    tablespace: Optional[str]
+    validate: Optional[bool]
 
 
 class AddUniqueConstraint(TypedDict):

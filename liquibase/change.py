@@ -30,8 +30,19 @@ ChangeEntity = Union[
     entity.CreateView,
 ]
 
+ChangeMiscellaneous = Union[
+    miscellaneous.AddLookupTable,
+    miscellaneous.Delete,
+    miscellaneous.Insert,
+    miscellaneous.LoadData,
+    miscellaneous.LoadUpdateData,
+    miscellaneous.MergeColumns,
+    miscellaneous.ModifyDataType,
+    miscellaneous.Update,
+]
 
-Changes = Union[ChangeConstraint, ChangeEntity]
+
+Changes = Union[ChangeConstraint, ChangeEntity, ChangeMiscellaneous]
 
 PreCondition = Dict[str, Dict[str, Dict[str, Any]]]
 

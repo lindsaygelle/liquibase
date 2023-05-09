@@ -1,5 +1,5 @@
 # pylint: disable=C0103,R,C0114
-from typing import List, Literal, TypedDict
+from typing import List, Literal, Optional, TypedDict
 
 # pylint: disable=E0401
 import entity
@@ -8,14 +8,16 @@ import entity
 class LookupTable(TypedDict):
     """Permitted attributes for `AddLookupTable.addLookupTable`."""
 
-    constraintName: str
+    constraintName: Optional[str]
     existingColumnName: str
+    existingTableCatalogName: Optional[str]
     existingTableName: str
+    existingTableSchemaName: Optional[str]
     newColumnDataType: str
     newColumnName: str
-    newTableCatalogName: str
+    newTableCatalogName: Optional[str]
     newTableName: str
-    newTableSchemaName: str
+    newTableSchemaName: Optional[str]
 
 
 class AddLookupTable(TypedDict):
@@ -30,13 +32,13 @@ class Param(TypedDict):
     """Permitted attributes for `WhereParam.param`."""
 
     name: str
-    value: str
-    valueNumeric: int
-    valueBoolean: bool
-    valueDate: str
-    valueComputed: str
-    valueSequenceNext: str
-    valueSequenceCurrent: str
+    value: Optional[str]
+    valueNumeric: Optional[int]
+    valueBoolean: Optional[bool]
+    valueDate: Optional[str]
+    valueComputed: Optional[str]
+    valueSequenceNext: Optional[str]
+    valueSequenceCurrent: Optional[str]
 
 
 class WhereParam(TypedDict):
@@ -48,11 +50,11 @@ class WhereParam(TypedDict):
 class DeleteAttributes(TypedDict):
     """Permitted attributes for `AddDelete.delete`."""
 
-    catalogName: str
-    schemaName: str
+    catalogName: Optional[str]
+    schemaName: Optional[str]
     tableName: str
-    where: str
-    whereParams: List[WhereParam]
+    where: Optional[str]
+    whereParams: Optional[List[WhereParam]]
 
 
 class Delete(TypedDict):
@@ -66,10 +68,10 @@ class Delete(TypedDict):
 class InsertAttributes(TypedDict):
     """Permitted attributes for `Insert.insert`."""
 
-    catalogName: str
+    catalogName: Optional[str]
     columns: List[entity.Column]
-    dbms: str
-    schemaName: str
+    dbms: Optional[str]
+    schemaName: Optional[str]
     tableName: str
 
 
@@ -100,7 +102,7 @@ ColumnType = Literal[
 class ColumnAttributes(TypedDict):
     """Permitted attributes for `Colum.column`."""
 
-    header: str
+    header: Optional[str]
     index: int
     name: str
     type: ColumnType
@@ -115,17 +117,17 @@ class Column(TypedDict):
 class LoadAttributes(TypedDict):
     """Common attributes for `LoadDataAttributes`, `LoadUpdateDataAttributes`."""
 
-    catalogName: str
+    catalogName: Optional[str]
     columns: List[Column]
-    commentLineStartsWith: str
-    encoding: str
+    commentLineStartsWith: Optional[str]
+    encoding: Optional[str]
     file: str
-    quotchar: str
-    relativeToChangelogFile: bool
-    schemaName: str
-    separator: str
+    quotchar: Optional[str]
+    relativeToChangelogFile: Optional[bool]
+    schemaName: Optional[str]
+    separator: Optional[str]
     tableName: str
-    usePreparedStatements: bool
+    usePreparedStatements: Optional[bool]
 
 
 class LoadDataAttributes(LoadAttributes):
@@ -158,13 +160,13 @@ class LoadUpdateData(TypedDict):
 class MergeColumn(TypedDict):
     """Permitted attributes for `MergeColumns.mergeColumns`."""
 
-    catalogName: str
+    catalogName: Optional[str]
     column1Name: str
     column2Name: str
     finalColumnName: str
     finalColumnType: str
-    joinString: str
-    schemaName: str
+    joinString: Optional[str]
+    schemaName: Optional[str]
     tableName: str
 
 
@@ -179,10 +181,10 @@ class MergeColumns(TypedDict):
 class ModifyData(TypedDict):
     """Permitted attributes for `ModifyDataType.modifyDataType`."""
 
-    catalogName: str
+    catalogName: Optional[str]
     columnName: str
     newDataType: str
-    schemaName: str
+    schemaName: Optional[str]
     tableName: str
 
 
@@ -197,12 +199,12 @@ class ModifyDataType(TypedDict):
 class UpdateAttributes(TypedDict):
     """Permitted attributes for `Update.update`."""
 
-    catalogName: str
+    catalogName: Optional[str]
     columns: List[entity.Column]
-    schemaName: str
+    schemaName: Optional[str]
     tableName: str
-    where: str
-    whereParam: WhereParam
+    where: Optional[str]
+    whereParam: Optional[WhereParam]
 
 
 class Update(TypedDict):
