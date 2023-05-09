@@ -1,21 +1,19 @@
 # pylint: disable=C0103,R,C0114
-from typing import List, TypedDict
+from typing import List, Literal, Optional, TypedDict
 
 
 class AutoIncrement(TypedDict):
     """Permitted attributes for `AddAutoIncrement.addAutoIncrement`."""
 
-    catalogName: str
-    clustered: bool
-    columnNames: str
-    constraintName: str
-    forIndexCatalogName: str
-    forIndexName: str
-    forIndexSchemaName: str
-    schemaName: str
-    tableName: str
-    tablespace: str
-    validate: bool
+    catalogName: Optional[str]
+    columnDataType: str
+    columnName: str
+    defaultOnNull: Optional[str]
+    generationType: Optional[str]
+    incrementBy: Optional[int]
+    schemaName: Optional[str]
+    startWith: Optional[str]
+    tableName: Optional[str]
 
 
 class AddAutoIncrement(TypedDict):
@@ -87,24 +85,24 @@ class AddColumn(TypedDict):
     """Permitted attributes for change
     [addColumn](https://docs.liquibase.com/change-types/add-column.html)."""
 
-    catalogName: str
+    catalogName: Optional[str]
     columns: List[Column]
-    schemaName: str
+    schemaName: Optional[str]
     tableName: str
 
 
 class Sequence(TypedDict):
     """Permitted attributes for `AlterSequence.alterSequence`."""
 
-    cacheSize: int
-    catalogName: str
-    cycle: bool
-    dataType: str
-    incrementBy: int
-    maxValue: int
-    minValue: int
-    ordered: bool
-    schemaName: str
+    cacheSize: Optional[int]
+    catalogName: Optional[str]
+    cycle: Optional[bool]
+    dataType: Optional[str]
+    incrementBy: Optional[int]
+    maxValue: Optional[int]
+    minValue: Optional[int]
+    ordered: Optional[bool]
+    schemaName: Optional[str]
     sequenceName: str
 
 
@@ -118,16 +116,16 @@ class AlterSequence(TypedDict):
 class Function(TypedDict):
     """Permitted attributes for `CreateFunction.createFunction`."""
 
-    catalogName: str
-    dbms: str
-    encoding: str
+    catalogName: Optional[str]
+    dbms: Optional[str]
+    encoding: Optional[str]
     functionBody: str
     functionName: str
     path: str
     procedureText: str
-    relativeToChangelogFile: bool
-    replaceIfExists: bool
-    schemaName: str
+    relativeToChangelogFile: Optional[bool]
+    replaceIfExists: Optional[bool]
+    schemaName: Optional[str]
 
 
 class CreateFunction(TypedDict):
@@ -140,21 +138,22 @@ class CreateFunction(TypedDict):
 class IndexColumn(TypedDict):
     """Permitted attributes for `Index.columns[.]`,"""
 
-    computed: bool
-    descending: bool
+    computed: Optional[bool]
+    descending: Optional[bool]
     name: str
 
 
 class Index(TypedDict):
     """Permitted attributes for `CreateIndex.createIndex`."""
 
-    catalogName: str
-    clustered: bool
+    catalogName: Optional[str]
+    clustered: Optional[bool]
+    column: IndexColumn
     indexName: str
-    schemaName: str
+    schemaName: Optional[str]
     tableName: str
-    tablespace: str
-    unique: bool
+    tablespace: Optional[str]
+    unique: Optional[bool]
 
 
 class CreateIndex(TypedDict):
@@ -167,15 +166,16 @@ class CreateIndex(TypedDict):
 class Package(TypedDict):
     """Permitted attributes for `CreatePackage.createPackage`."""
 
-    catalogName: str
-    dbms: str
-    encoding: str
+    catalogName: Optional[str]
+    dbms: Optional[str]
+    encoding: Optional[str]
     packageName: str
     packageText: str
     path: str
-    relativeToChangelogFile: bool
-    replaceIfExists: bool
-    schemaName: str
+    procedureText: str
+    relativeToChangelogFile: Optional[bool]
+    replaceIfExists: Optional[bool]
+    schemaName: Optional[str]
 
 
 class CreatePackage(TypedDict):
@@ -188,15 +188,15 @@ class CreatePackage(TypedDict):
 class PackageBody(TypedDict):
     """Permitted attributes for `CreatePackageBody.createPackageBody`."""
 
-    catalogName: str
-    dbms: str
-    encoding: str
+    catalogName: Optional[str]
+    dbms: Optional[str]
+    encoding: Optional[str]
     packageBodyName: str
     packageBodyText: str
     path: str
-    relativeToChangelogFile: bool
-    replaceIfExists: bool
-    schemaName: str
+    relativeToChangelogFile: Optional[bool]
+    replaceIfExists: Optional[bool]
+    schemaName: Optional[str]
 
 
 class CreatePackageBody(TypedDict):
@@ -210,15 +210,15 @@ class CreatePackageBody(TypedDict):
 class Procedure(TypedDict):
     """Permitted attributes for `CreateProcedure.createProcedure`."""
 
-    catalogName: str
-    dbms: str
-    encoding: str
+    catalogName: Optional[str]
+    dbms: Optional[str]
+    encoding: Optional[str]
     path: str
-    procedureBody: str
     procedureName: str
-    relativeToChangelogFile: bool
-    replaceIfExists: bool
-    schemaName: str
+    procedureText: str
+    relativeToChangelogFile: Optional[bool]
+    replaceIfExists: Optional[bool]
+    schemaName: Optional[str]
 
 
 class CreateProcedure(TypedDict):
@@ -240,11 +240,15 @@ class CreateSequence(TypedDict):
 class Synonym(TypedDict):
     """Permitted attributes for `CreateSynonym.createSynonym`."""
 
+    objectCatalogName: Optional[str]
     objectName: str
+    objectSchemaName: Optional[str]
     objectType: str
     private: bool
-    replaceIfExists: bool
+    replaceIfExists: Optional[bool]
+    synonymCatalogName: Optional[str]
     synonymName: str
+    synonymSchemaName: Optional[str]
 
 
 class CreateSynonym(TypedDict):
@@ -264,11 +268,12 @@ class TableColumn(TypedDict):
 class Table(TypedDict):
     """Permitted attributes for `CreateTable.createTable`."""
 
-    catalogName: str
+    catalogName: Optional[str]
     columns: List[TableColumn]
-    remarks: str
-    schemaName: str
+    remarks: Optional[str]
+    schemaName: Optional[str]
     tableName: str
+    tablespace: Optional[str]
 
 
 class CreateTable(TypedDict):
@@ -281,17 +286,17 @@ class CreateTable(TypedDict):
 class Trigger(TypedDict):
     """Permitted attributes for `CreateTrigger.createTrigger`."""
 
-    catalogName: str
-    comments: str
-    dbms: str
-    disabled: bool
-    encoding: str
-    path: str
-    relativeToChangelogFile: bool
-    replaceIfExists: bool
-    schemaName: str
-    scope: str
-    tableName: str
+    catalogName: Optional[str]
+    dbms: Optional[str]
+    disabled: Optional[bool]
+    encoding: Optional[str]
+    path: Optional[str]
+    procedureText: str
+    relativeToChangelogFile: Optional[bool]
+    replaceIfExists: Optional[bool]
+    schemaName: Optional[str]
+    scope: Optional[str]
+    tableName: Optional[str]
     triggerBody: str
     triggerName: str
 
@@ -303,17 +308,20 @@ class CreateTrigger(TypedDict):
     createTrigger: Trigger
 
 
+ReplaceIfExists = Literal["CREATE", "REPLACE"]
+
+
 class View(TypedDict):
     """Permitted attributes for `CreateView.createView`."""
 
-    catalogName: str
-    encoding: str
-    fullDefinition: bool
-    path: str
-    relativeToChangelogFile: bool
-    remarks: str
-    replaceIfExists: bool
-    schemaName: str
+    catalogName: Optional[str]
+    encoding: Optional[str]
+    fullDefinition: Optional[bool]
+    path: Optional[str]
+    relativeToChangelogFile: Optional[bool]
+    remarks: Optional[str]
+    replaceIfExists: ReplaceIfExists
+    schemaName: Optional[str]
     selectQuery: str
     viewName: str
 
