@@ -185,3 +185,35 @@ class SqlFile(TypedDict):
     """
 
     sqlFile: SqlFileAttributes
+
+
+@dataclass
+class StopAttributes(TypedDict):
+    """Permitted attributes for `Stop.stop`."""
+
+    message: str
+
+
+@dataclass
+class Stop(TypedDict):
+    """Permitted attributes for change
+    [stop](https://docs.liquibase.com/change-types/stop.html).
+    """
+
+    stop: StopAttributes
+
+
+@dataclass
+class TagDatabaseAttributes(TypedDict):
+    """Permitted attributes for `TagDatabase.tag`."""
+
+    tag: str
+
+
+@dataclass
+class TagDatabase(TypedDict):
+    """Permitted attributes for change
+    [tagDatabase](https://docs.liquibase.com/change-types/tag-database.html).
+    """
+
+    tagDatabase: TagDatabaseAttributes
