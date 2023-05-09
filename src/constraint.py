@@ -1,7 +1,9 @@
 # pylint: disable=C0103,R,C0114
+from dataclasses import dataclass
 from typing import Literal, TypedDict
 
 
+@dataclass
 class CheckConstraint(TypedDict):
     """Permitted attributes for `AddCheckConstraint.addCheckConstraint`."""
 
@@ -14,6 +16,7 @@ class CheckConstraint(TypedDict):
     validate: bool
 
 
+@dataclass
 class AddCheckConstraint(TypedDict):
     """Permitted attributes for change
     [addCheckConstraint](https://docs.liquibase.com/change-types/add-check-constraint.html).
@@ -27,6 +30,7 @@ ForeignKeyAction = Literal[
 ]
 
 
+@dataclass
 class ForeignKeyConstraint(TypedDict):
     """Permitted attributes for `AddForeignKeyConstraint.addForeignKeyConstraint`."""
 
@@ -47,6 +51,7 @@ class ForeignKeyConstraint(TypedDict):
     validate: bool
 
 
+@dataclass
 class AddForeignKeyConstraint(TypedDict):
     # pylint: disable=C0301
     """Permitted attributes for change
@@ -56,6 +61,7 @@ class AddForeignKeyConstraint(TypedDict):
     addForeignKeyConstraint: ForeignKeyConstraint
 
 
+@dataclass
 class NotNullConstraint(TypedDict):
     """Permitted attributes for `AddNotNullConstraint.addNotNullConstraint`."""
 
@@ -69,6 +75,7 @@ class NotNullConstraint(TypedDict):
     validate: bool
 
 
+@dataclass
 class AddNotNullConstraint(TypedDict):
     # pylint: disable=C0301
     """Permitted attributes for change
@@ -78,6 +85,7 @@ class AddNotNullConstraint(TypedDict):
     addNotNullConstraint: NotNullConstraint
 
 
+@dataclass
 class PrimaryKey(TypedDict):
     """Permitted attributes for `AddPrimaryKey.addPrimaryKey`."""
 
@@ -94,6 +102,7 @@ class PrimaryKey(TypedDict):
     validate: bool
 
 
+@dataclass
 class AddPrimaryKey(TypedDict):
     """Permitted attributes for change
     [addPrimaryKey](https://docs.liquibase.com/change-types/add-primary-key.html).
@@ -102,6 +111,7 @@ class AddPrimaryKey(TypedDict):
     addPrimaryKey: PrimaryKey
 
 
+@dataclass
 class UniqueConstraint(TypedDict):
     """Permitted attributes for `AddUniqueConstraint.addUniqueConstraint`."""
 
@@ -121,6 +131,7 @@ class UniqueConstraint(TypedDict):
     validate: bool
 
 
+@dataclass
 class AddUniqueConstraint(TypedDict):
     """Permitted attributes for change
     [addUniqueConstraint](https://docs.liquibase.com/change-types/add-primary-key.html).

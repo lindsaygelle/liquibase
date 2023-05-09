@@ -1,8 +1,12 @@
 # pylint: disable=C0103,R,C0114
+from dataclasses import dataclass
 from typing import List, Literal, TypedDict
-from . import entity
+
+# pylint: disable=E0401
+import entity
 
 
+@dataclass
 class LookupTable(TypedDict):
     """Permitted attributes for `AddLookupTable.addLookupTable`."""
 
@@ -16,6 +20,7 @@ class LookupTable(TypedDict):
     newTableSchemaName: str
 
 
+@dataclass
 class AddLookupTable(TypedDict):
     """Permitted attributes for change
     [addLookupTable](https://docs.liquibase.com/change-types/add-lookup-table.html).
@@ -24,8 +29,9 @@ class AddLookupTable(TypedDict):
     addLookupTable: LookupTable
 
 
+@dataclass
 class Param(TypedDict):
-    """Permitted attributes for `[DeleteParam].param`."""
+    """Permitted attributes for `WhereParam.param`."""
 
     name: str
     value: str
@@ -37,14 +43,14 @@ class Param(TypedDict):
     valueSequenceCurrent: str
 
 
-class DeleteParam(TypedDict):
-    """Permitted attributes for change
-    [delete](https://docs.liquibase.com/change-types/delete.html).
-    """
+@dataclass
+class WhereParam(TypedDict):
+    """Permitted attributes for `Delete.delete`, `Update.update`."""
 
     param: Param
 
 
+@dataclass
 class DeleteAttributes(TypedDict):
     """Permitted attributes for `AddDelete.delete`."""
 
@@ -52,9 +58,10 @@ class DeleteAttributes(TypedDict):
     schemaName: str
     tableName: str
     where: str
-    whereParams: List[DeleteParam]
+    whereParams: List[WhereParam]
 
 
+@dataclass
 class Delete(TypedDict):
     """Permitted attributes for change
     [delete](https://docs.liquibase.com/change-types/delete.html).
@@ -63,6 +70,7 @@ class Delete(TypedDict):
     delete: DeleteAttributes
 
 
+@dataclass
 class InsertAttributes(TypedDict):
     """Permitted attributes for `Insert.insert`."""
 
@@ -73,6 +81,7 @@ class InsertAttributes(TypedDict):
     tableName: str
 
 
+@dataclass
 class Insert(TypedDict):
     """Permitted attributes for change
     [insert](https://docs.liquibase.com/change-types/insert.html).
@@ -97,6 +106,7 @@ ColumnType = Literal[
 ]
 
 
+@dataclass
 class ColumnAttributes(TypedDict):
     """Permitted attributes for `Colum.column`."""
 
@@ -106,12 +116,14 @@ class ColumnAttributes(TypedDict):
     type: ColumnType
 
 
+@dataclass
 class Column(TypedDict):
     """Permitted attributes for `[LoadDataAttributes | LoadUpdateDataAttributes].columns[*]`."""
 
     column: ColumnAttributes
 
 
+@dataclass
 class LoadAttributes(TypedDict):
     """Common attributes for `LoadDataAttributes`, `LoadUpdateDataAttributes`."""
 
@@ -128,6 +140,7 @@ class LoadAttributes(TypedDict):
     usePreparedStatements: bool
 
 
+@dataclass
 class LoadDataAttributes(LoadAttributes):
     """Permitted attributes for `LoadData.loadData`."""
 
@@ -135,6 +148,7 @@ class LoadDataAttributes(LoadAttributes):
     primaryKey: bool
 
 
+@dataclass
 class LoadData(TypedDict):
     """Permitted attributes for change
     [loadData](https://docs.liquibase.com/change-types/load-data.html).
@@ -143,10 +157,12 @@ class LoadData(TypedDict):
     loadData: LoadDataAttributes
 
 
+@dataclass
 class LoadUpdateDataAttributes(LoadAttributes):
     """Permitted attributes for `LoadUpdateData.loadUpdateData`."""
 
 
+@dataclass
 class LoadUpdateData(TypedDict):
     """Permitted attributes for change
     [loadUpdateData](https://docs.liquibase.com/change-types/load-update-data.html).
@@ -155,6 +171,7 @@ class LoadUpdateData(TypedDict):
     loadUpdateData: LoadUpdateDataAttributes
 
 
+@dataclass
 class MergeColumn(TypedDict):
     """Permitted attributes for `MergeColumns.mergeColumns`."""
 
@@ -168,6 +185,7 @@ class MergeColumn(TypedDict):
     tableName: str
 
 
+@dataclass
 class MergeColumns(TypedDict):
     """Permitted attributes for change
     [mergeColumns](https://docs.liquibase.com/change-types/merge-columns.html).
@@ -176,6 +194,7 @@ class MergeColumns(TypedDict):
     mergeColumns: MergeColumn
 
 
+@dataclass
 class ModifyData(TypedDict):
     """Permitted attributes for `ModifyDataType.modifyDataType`."""
 
@@ -186,9 +205,31 @@ class ModifyData(TypedDict):
     tableName: str
 
 
+@dataclass
 class ModifyDataType(TypedDict):
     """Permitted attributes for change
     [modifyDataType](https://docs.liquibase.com/change-types/modify-data-type.html).
     """
 
     modifyDataType: ModifyData
+
+
+@dataclass
+class UpdateAttributes(TypedDict):
+    """Permitted attributes for `Update.update`."""
+
+    catalogName: str
+    columns: List[entity.Column]
+    schemaName: str
+    tableName: str
+    where: str
+    whereParam: WhereParam
+
+
+@dataclass
+class Update(TypedDict):
+    """Permitted attributes for change
+    [update](https://docs.liquibase.com/change-types/update.html).
+    """
+
+    update: UpdateAttributes
