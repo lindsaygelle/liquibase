@@ -7,7 +7,7 @@ class CustomChange(TypedDict):
     [customChange](https://docs.liquibase.com/change-types/custom-change.html).
     """
 
-    customChange: Dict[str, Any]
+    customChange: Dict[str, Dict[str, Dict[str, Any]]]
 
 
 class Empty(TypedDict):
@@ -15,7 +15,7 @@ class Empty(TypedDict):
     [empty](https://docs.liquibase.com/change-types/empty.html).
     """
 
-    empty: Dict[Any, Any]
+    empty: Dict[str, Dict[str, Dict[str, Any]]]
 
 
 class Arg(TypedDict):
