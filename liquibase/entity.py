@@ -1,9 +1,7 @@
 # pylint: disable=C0103,R,C0114
-from dataclasses import dataclass
 from typing import List, TypedDict
 
 
-@dataclass
 class AutoIncrement(TypedDict):
     """Permitted attributes for `AddAutoIncrement.addAutoIncrement`."""
 
@@ -20,7 +18,6 @@ class AutoIncrement(TypedDict):
     validate: bool
 
 
-@dataclass
 class AddAutoIncrement(TypedDict):
     """Permitted attributes for change
     [addAutoIncrement](https://docs.liquibase.com/change-types/add-auto-increment.html).
@@ -29,7 +26,6 @@ class AddAutoIncrement(TypedDict):
     addAutoIncrement: AutoIncrement
 
 
-@dataclass
 class ColumnConstraint(TypedDict):
     """Permitted attributes for `Column.constraints`."""
 
@@ -56,7 +52,6 @@ class ColumnConstraint(TypedDict):
     validateUnique: bool
 
 
-@dataclass
 class Column(TypedDict):
     """Permitted attributes for `AddColumn.column`."""
 
@@ -88,7 +83,6 @@ class Column(TypedDict):
     valueNumeric: int
 
 
-@dataclass
 class AddColumn(TypedDict):
     """Permitted attributes for change
     [addColumn](https://docs.liquibase.com/change-types/add-column.html)."""
@@ -99,7 +93,6 @@ class AddColumn(TypedDict):
     tableName: str
 
 
-@dataclass
 class Sequence(TypedDict):
     """Permitted attributes for `AlterSequence.alterSequence`."""
 
@@ -115,7 +108,6 @@ class Sequence(TypedDict):
     sequenceName: str
 
 
-@dataclass
 class AlterSequence(TypedDict):
     """Permitted attributes for change
     [alterSequence](https://docs.liquibase.com/change-types/alter-sequence.html)."""
@@ -123,7 +115,6 @@ class AlterSequence(TypedDict):
     alterSequence: Sequence
 
 
-@dataclass
 class Function(TypedDict):
     """Permitted attributes for `CreateFunction.createFunction`."""
 
@@ -139,7 +130,6 @@ class Function(TypedDict):
     schemaName: str
 
 
-@dataclass
 class CreateFunction(TypedDict):
     """Permitted attributes for change
     [createFunction](https://docs.liquibase.com/change-types/create-function.html)."""
@@ -147,7 +137,6 @@ class CreateFunction(TypedDict):
     createFunction: Function
 
 
-@dataclass
 class IndexColumn(TypedDict):
     """Permitted attributes for `Index.columns[.]`,"""
 
@@ -156,7 +145,6 @@ class IndexColumn(TypedDict):
     name: str
 
 
-@dataclass
 class Index(TypedDict):
     """Permitted attributes for `CreateIndex.createIndex`."""
 
@@ -169,7 +157,6 @@ class Index(TypedDict):
     unique: bool
 
 
-@dataclass
 class CreateIndex(TypedDict):
     """Permitted attributes for change
     [createIndex](https://docs.liquibase.com/change-types/create-index.html)."""
@@ -177,7 +164,6 @@ class CreateIndex(TypedDict):
     createIndex: Index
 
 
-@dataclass
 class Package(TypedDict):
     """Permitted attributes for `CreatePackage.createPackage`."""
 
@@ -192,7 +178,6 @@ class Package(TypedDict):
     schemaName: str
 
 
-@dataclass
 class CreatePackage(TypedDict):
     """Permitted attributes for change
     [createPackage](https://docs.liquibase.com/change-types/create-package.html)."""
@@ -200,7 +185,6 @@ class CreatePackage(TypedDict):
     createPackage: Package
 
 
-@dataclass
 class PackageBody(TypedDict):
     """Permitted attributes for `CreatePackageBody.createPackageBody`."""
 
@@ -215,7 +199,6 @@ class PackageBody(TypedDict):
     schemaName: str
 
 
-@dataclass
 class CreatePackageBody(TypedDict):
     """Permitted attributes for change
     [createPackageBody](https://docs.liquibase.com/change-types/create-package-body.html).
@@ -224,7 +207,6 @@ class CreatePackageBody(TypedDict):
     createPackageBody: PackageBody
 
 
-@dataclass
 class Procedure(TypedDict):
     """Permitted attributes for `CreateProcedure.createProcedure`."""
 
@@ -239,7 +221,6 @@ class Procedure(TypedDict):
     schemaName: str
 
 
-@dataclass
 class CreateProcedure(TypedDict):
     """Permitted attributes for change
     [createProcedure](https://docs.liquibase.com/change-types/create-procedure.html).
@@ -248,7 +229,6 @@ class CreateProcedure(TypedDict):
     createProcedure: Procedure
 
 
-@dataclass
 class CreateSequence(TypedDict):
     """Permitted attributes for change
     [createSequence](https://docs.liquibase.com/change-types/create-sequence.html).
@@ -257,7 +237,6 @@ class CreateSequence(TypedDict):
     createSequence: Sequence
 
 
-@dataclass
 class Synonym(TypedDict):
     """Permitted attributes for `CreateSynonym.createSynonym`."""
 
@@ -268,7 +247,6 @@ class Synonym(TypedDict):
     synonymName: str
 
 
-@dataclass
 class CreateSynonym(TypedDict):
     """Permitted attributes for change
     [createSynonym](https://docs.liquibase.com/change-types/create-synonym.html).
@@ -277,17 +255,14 @@ class CreateSynonym(TypedDict):
     createSynonym: Synonym
 
 
-@dataclass
 class TableColumn(TypedDict):
     """Permitted attributes for `CreateTable.columns[*]`."""
 
     column: Column
 
 
-@dataclass
 class Table(TypedDict):
-    """Permitted attributes for change
-    [createTable](https://docs.liquibase.com/change-types/create-table.html)."""
+    """Permitted attributes for `CreateTable.createTable`."""
 
     catalogName: str
     columns: List[TableColumn]
@@ -296,7 +271,38 @@ class Table(TypedDict):
     tableName: str
 
 
-@dataclass
+class CreateTable(TypedDict):
+    """Permitted attributes for change
+    [createTable](https://docs.liquibase.com/change-types/create-table.html)."""
+
+    createTable: Table
+
+
+class Trigger(TypedDict):
+    """Permitted attributes for `CreateTrigger.createTrigger`."""
+
+    catalogName: str
+    comments: str
+    dbms: str
+    disabled: bool
+    encoding: str
+    path: str
+    relativeToChangelogFile: bool
+    replaceIfExists: bool
+    schemaName: str
+    scope: str
+    tableName: str
+    triggerBody: str
+    triggerName: str
+
+
+class CreateTrigger(TypedDict):
+    """Permitted attributes for change
+    [createTrigger](https://docs.liquibase.com/change-types/create-trigger.html)."""
+
+    createTrigger: Trigger
+
+
 class View(TypedDict):
     """Permitted attributes for `CreateView.createView`."""
 
@@ -312,7 +318,6 @@ class View(TypedDict):
     viewName: str
 
 
-@dataclass
 class CreateView(TypedDict):
     """Permitted attributes for change
     [createView](https://docs.liquibase.com/change-types/create-view.html)."""
