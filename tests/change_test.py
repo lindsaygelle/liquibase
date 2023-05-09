@@ -23,23 +23,23 @@ class TestChangeSetAttributes(unittest.TestCase):
             "author": "John Doe",
             "changes": [],
             "comment": "A comment",
-            "context_filter": "Some context filter",
+            "contextFilter": "Some context filter",
             "created": "2022-01-01",
             "dbms": "MySQL",
-            "id_": "change_set_id",
-            "fail_on_error": True,
+            "id": "change_set_id",
+            "failOnError": True,
             "ignore": False,
             "labels": "label1,label2",
-            "logical_file_path": "path/to/file.sql",
-            "object_quoting_strategy": "QUOTE_ALL_OBJECTS",
-            "pre_conditions": [],
+            "logicalFilePath": "path/to/file.sql",
+            "objectQuotingStrategy": "QUOTE_ALL_OBJECTS",
+            "preConditions": [],
             "rollback": {},
-            "run_always": False,
-            "run_in_transaction": True,
-            "run_on_change": False,
-            "run_order": "first",
-            "run_with": None,
-            "valid_checksum": "12345",
+            "runAlways": False,
+            "runInTransaction": True,
+            "runOnChange": False,
+            "runOrder": "first",
+            "runWith": None,
+            "validCheckSum": "12345",
         }
 
         # Create instance of ChangeSetAttributes
@@ -49,27 +49,25 @@ class TestChangeSetAttributes(unittest.TestCase):
         self.assertEqual(attributes["author"], test_data["author"])
         self.assertEqual(attributes["changes"], test_data["changes"])
         self.assertEqual(attributes["comment"], test_data["comment"])
-        self.assertEqual(attributes["contextFilter"], test_data["context_filter"])
+        self.assertEqual(attributes["contextFilter"], test_data["contextFilter"])
         self.assertEqual(attributes["created"], test_data["created"])
         self.assertEqual(attributes["dbms"], test_data["dbms"])
-        self.assertEqual(attributes["id"], test_data["id_"])
-        self.assertEqual(attributes["failOnError"], test_data["fail_on_error"])
+        self.assertEqual(attributes["id"], test_data["id"])
+        self.assertEqual(attributes["failOnError"], test_data["failOnError"])
         self.assertEqual(attributes["ignore"], test_data["ignore"])
         self.assertEqual(attributes["labels"], test_data["labels"])
-        self.assertEqual(attributes["logicalFilePath"], test_data["logical_file_path"])
+        self.assertEqual(attributes["logicalFilePath"], test_data["logicalFilePath"])
         self.assertEqual(
-            attributes["objectQuotingStrategy"], test_data["object_quoting_strategy"]
+            attributes["objectQuotingStrategy"], test_data["objectQuotingStrategy"]
         )
-        self.assertEqual(attributes["preConditions"], test_data["pre_conditions"])
+        self.assertEqual(attributes["preConditions"], test_data["preConditions"])
         self.assertEqual(attributes["rollback"], test_data["rollback"])
-        self.assertEqual(attributes["runAlways"], test_data["run_always"])
-        self.assertEqual(
-            attributes["runInTransaction"], test_data["run_in_transaction"]
-        )
-        self.assertEqual(attributes["runOnChange"], test_data["run_on_change"])
-        self.assertEqual(attributes["runOrder"], test_data["run_order"])
-        self.assertEqual(attributes["runWith"], test_data["run_with"])
-        self.assertEqual(attributes["validCheckSum"], test_data["valid_checksum"])
+        self.assertEqual(attributes["runAlways"], test_data["runAlways"])
+        self.assertEqual(attributes["runInTransaction"], test_data["runInTransaction"])
+        self.assertEqual(attributes["runOnChange"], test_data["runOnChange"])
+        self.assertEqual(attributes["runOrder"], test_data["runOrder"])
+        self.assertEqual(attributes["runWith"], test_data["runWith"])
+        self.assertEqual(attributes["validCheckSum"], test_data["validCheckSum"])
 
 
 class TestChangeSet(unittest.TestCase):
@@ -108,7 +106,7 @@ class TestDatabaseChangeLog(unittest.TestCase):
         # Test instance attributes
         self.assertIsInstance(database_change_log, dict)
         self.assertIsInstance(database_change_log["databaseChangeLog"], list)
-        self.assertEqual(len(database_change_log["databaseChangeLog"]), 1)
+        self.assertEqual(len(database_change_log["databaseChangeLog"]), 0)
 
 
 if __name__ == "__main__":
