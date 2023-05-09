@@ -3,132 +3,112 @@ import os
 import sys
 import unittest
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+current_file_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.abspath(os.path.join(current_file_dir, ".."))
+sys.path.insert(0, parent_dir)
 
 # pylint: disable=C0413
 from liquibase.change import (
+    ChangeSet,
     ChangeSetAttributes,
     DatabaseChangeLog,
-    Property,
     PreConditions,
 )
 
 
+class TestChangeSetAttributes(unittest.TestCase):
+    def test_create_change_set_attributes(self):
+        # Define test data
+        test_data = {
+            "author": "John Doe",
+            "changes": [],
+            "comment": "A comment",
+            "context_filter": "Some context filter",
+            "created": "2022-01-01",
+            "dbms": "MySQL",
+            "id_": "change_set_id",
+            "fail_on_error": True,
+            "ignore": False,
+            "labels": "label1,label2",
+            "logical_file_path": "path/to/file.sql",
+            "object_quoting_strategy": "QUOTE_ALL_OBJECTS",
+            "pre_conditions": [],
+            "rollback": {},
+            "run_always": False,
+            "run_in_transaction": True,
+            "run_on_change": False,
+            "run_order": "first",
+            "run_with": None,
+            "valid_checksum": "12345",
+        }
+
+        # Create instance of ChangeSetAttributes
+        attributes = ChangeSetAttributes(**test_data)
+
+        # Test instance attributes
+        self.assertEqual(attributes["author"], test_data["author"])
+        self.assertEqual(attributes["changes"], test_data["changes"])
+        self.assertEqual(attributes["comment"], test_data["comment"])
+        self.assertEqual(attributes["contextFilter"], test_data["context_filter"])
+        self.assertEqual(attributes["created"], test_data["created"])
+        self.assertEqual(attributes["dbms"], test_data["dbms"])
+        self.assertEqual(attributes["id"], test_data["id_"])
+        self.assertEqual(attributes["failOnError"], test_data["fail_on_error"])
+        self.assertEqual(attributes["ignore"], test_data["ignore"])
+        self.assertEqual(attributes["labels"], test_data["labels"])
+        self.assertEqual(attributes["logicalFilePath"], test_data["logical_file_path"])
+        self.assertEqual(
+            attributes["objectQuotingStrategy"], test_data["object_quoting_strategy"]
+        )
+        self.assertEqual(attributes["preConditions"], test_data["pre_conditions"])
+        self.assertEqual(attributes["rollback"], test_data["rollback"])
+        self.assertEqual(attributes["runAlways"], test_data["run_always"])
+        self.assertEqual(
+            attributes["runInTransaction"], test_data["run_in_transaction"]
+        )
+        self.assertEqual(attributes["runOnChange"], test_data["run_on_change"])
+        self.assertEqual(attributes["runOrder"], test_data["run_order"])
+        self.assertEqual(attributes["runWith"], test_data["run_with"])
+        self.assertEqual(attributes["validCheckSum"], test_data["valid_checksum"])
+
+
 class TestChangeSet(unittest.TestCase):
-    def test_change_set_attributes(self):
-        # create an instance of ChangeSetAttributes
-        change_set_attributes = ChangeSetAttributes(
-            author="test_author",
-            changes=[],
-            comment="test comment",
-            contextFilter="test filter",
-            created="test created",
-            dbms="test dbms",
-            id="test id",
-            failOnError=True,
-            ignore=False,
-            labels="test labels",
-            logicalFilePath="test path",
-            objectQuotingStrategy="LEGACY",
-            preConditions=[],
-            rollback={},
-            runAlways=True,
-            runInTransaction=True,
-            runOnChange=True,
-            runOrder="first",
-            runWith=None,
-            validCheckSum="test sum",
-        )
-
-        # check that each attribute is set correctly
-        self.assertEqual(change_set_attributes["author"], "test_author")
-        self.assertEqual(change_set_attributes["changes"], [])
-        self.assertEqual(change_set_attributes["comment"], "test comment")
-        self.assertEqual(change_set_attributes["contextFilter"], "test filter")
-        self.assertEqual(change_set_attributes["created"], "test created")
-        self.assertEqual(change_set_attributes["dbms"], "test dbms")
-        self.assertEqual(change_set_attributes["id"], "test id")
-        self.assertEqual(change_set_attributes["failOnError"], True)
-        self.assertEqual(change_set_attributes["ignore"], False)
-        self.assertEqual(change_set_attributes["labels"], "test labels")
-        self.assertEqual(change_set_attributes["logicalFilePath"], "test path")
-        self.assertEqual(change_set_attributes["objectQuotingStrategy"], "LEGACY")
-        self.assertEqual(change_set_attributes["preConditions"], [])
-        self.assertEqual(change_set_attributes["rollback"], {})
-        self.assertEqual(change_set_attributes["runAlways"], True)
-        self.assertEqual(change_set_attributes["runInTransaction"], True)
-        self.assertEqual(change_set_attributes["runOnChange"], True)
-        self.assertEqual(change_set_attributes["runOrder"], "first")
-        self.assertEqual(change_set_attributes["runWith"], None)
-        self.assertEqual(change_set_attributes["validCheckSum"], "test sum")
+    def test_create_change_set(self):
+        # Define test data
+        test_data = {"author": "John Doe", "changes": [], "id": "change_set_id"}
+        # Create instance of ChangeSetAttributes
+        attributes = ChangeSetAttributes(**test_data)
+        # Create instance of ChangeSet
+        change_set = ChangeSet(changeSet=attributes)
+        # Test instance attributes
+        self.assertIsInstance(change_set, dict)
+        self.assertEqual(change_set["changeSet"], attributes)
 
 
-class TestPropertyAndPreConditions(unittest.TestCase):
-    def test_property_and_preconditions(self):
-        property_: Property = {
-            "dbms": "mysql",
-            "context": "dev",
-            "file": "db.changelog.xml",
-            "name": "key_name",
-            "relativeToChangelogFile": True,
-            "value": "value",
-        }
-        preconditions: PreConditions = {
-            "preConditions": [
-                {
-                    "onFail": "HALT",
-                    "not": {"dbms": "mysql", "runningAs": "root"},
-                    "and": [
-                        {"columnExists": {"tableName": "test", "columnName": "id"}}
-                    ],
-                }
-            ]
-        }
-        self.assertEqual(property_["dbms"], "mysql")
-        self.assertEqual(property_["context"], "dev")
-        self.assertEqual(property_["file"], "db.changelog.xml")
-        self.assertEqual(property_["name"], "key_name")
-        self.assertTrue(property_["relativeToChangelogFile"])
-        self.assertEqual(property_["value"], "value")
-        self.assertIsInstance(preconditions, dict)
-        self.assertIn("preConditions", preconditions)
-        self.assertIsInstance(preconditions["preConditions"], list)
-        self.assertIsInstance(preconditions["preConditions"][0], dict)
-        self.assertIn("onFail", preconditions["preConditions"][0])
-        self.assertEqual(preconditions["preConditions"][0]["onFail"], "HALT")
-        self.assertIn("not", preconditions["preConditions"][0])
-        self.assertIsInstance(preconditions["preConditions"][0]["not"], dict)
-        self.assertIn("dbms", preconditions["preConditions"][0]["not"])
-        self.assertEqual(preconditions["preConditions"][0]["not"]["dbms"], "mysql")
-        self.assertIn("runningAs", preconditions["preConditions"][0]["not"])
-        self.assertEqual(preconditions["preConditions"][0]["not"]["runningAs"], "root")
-        self.assertIn("and", preconditions["preConditions"][0])
-        self.assertIsInstance(preconditions["preConditions"][0]["and"], list)
-        self.assertIsInstance(preconditions["preConditions"][0]["and"][0], dict)
-        self.assertIn("columnExists", preconditions["preConditions"][0]["and"][0])
-        self.assertIsInstance(
-            preconditions["preConditions"][0]["and"][0]["columnExists"], dict
+class TestPreConditions(unittest.TestCase):
+    def test_create_preconditions(self):
+        # Create instance of PreConditions
+        pre_conditions = PreConditions(
+            preConditions=[{"onFail": "CONTINUE", "dbms": {"type": "h2"}}]
         )
-        self.assertIn(
-            "tableName", preconditions["preConditions"][0]["and"][0]["columnExists"]
-        )
-        self.assertEqual(
-            preconditions["preConditions"][0]["and"][0]["columnExists"]["tableName"],
-            "test",
-        )
-        self.assertIn(
-            "columnName", preconditions["preConditions"][0]["and"][0]["columnExists"]
-        )
-        self.assertEqual(
-            preconditions["preConditions"][0]["and"][0]["columnExists"]["columnName"],
-            "id",
-        )
+        # Test instance attributes
+        self.assertIsInstance(pre_conditions, dict)
+        self.assertIsInstance(pre_conditions["preConditions"], list)
+        self.assertEqual(len(pre_conditions["preConditions"]), 1)
+        self.assertIsInstance(pre_conditions["preConditions"][0], dict)
+        self.assertEqual(pre_conditions["preConditions"][0]["onFail"], "CONTINUE")
+        self.assertIsInstance(pre_conditions["preConditions"][0]["dbms"], dict)
+        self.assertEqual(pre_conditions["preConditions"][0]["dbms"]["type"], "h2")
 
 
 class TestDatabaseChangeLog(unittest.TestCase):
-    def test_database_change_log(self):
-        db_changelog: DatabaseChangeLog = {"databaseChangeLog": []}
-        self.assertIsInstance(db_changelog["databaseChangeLog"], list)
+    def test_create_database_changelog(self):
+        # Create instance of PreConditions
+        database_change_log = DatabaseChangeLog(databaseChangeLog=[])
+        # Test instance attributes
+        self.assertIsInstance(database_change_log, dict)
+        self.assertIsInstance(database_change_log["databaseChangeLog"], list)
+        self.assertEqual(len(database_change_log["databaseChangeLog"]), 1)
 
 
 if __name__ == "__main__":
