@@ -27,10 +27,10 @@ class Arg(TypedDict):
 class ExecuteCommandAttributes(TypedDict):
     """Permitted attributes for `ExecuteCommand.executeCommand`."""
 
-    args: List[Arg]
+    args: Optional[List[Arg]]
     executable: str
-    os: str
-    timeout: str
+    os: Optional[str]
+    timeout: Optional[str]
 
 
 class ExecuteCommand(TypedDict):
@@ -45,9 +45,9 @@ class IncludeAttributes(TypedDict):
     """Permitted attributes for `Include.include`."""
 
     file: str
-    relativeToChangelogFile: bool
-    context: str
-    labels: str
+    relativeToChangelogFile: Optional[bool]
+    context: Optional[str]
+    labels: Optional[str]
 
 
 class Include(TypedDict):
@@ -61,12 +61,12 @@ class Include(TypedDict):
 class IncludeAllAttributes(TypedDict):
     """Permitted attributes for `IncludeAll.includeAll`."""
 
-    context: str
-    errorIfMissingOrEmpty: bool
-    filter: str
+    context: Optional[str]
+    errorIfMissingOrEmpty: Optional[bool]
+    filter: Optional[str]
     path: str
-    relativeToChangelogFile: bool
-    resourceComparator: str
+    relativeToChangelogFile: Optional[bool]
+    resourceComparator: Optional[str]
 
 
 class IncludeAll(TypedDict):
@@ -80,9 +80,9 @@ class IncludeAll(TypedDict):
 class MarkUnusedAttributes(TypedDict):
     """Permitted attributes for `MarkUnused.markUnused`."""
 
-    catalogName: str
+    catalogName: Optional[str]
     columnName: str
-    schemaName: str
+    schemaName: Optional[str]
     tableName: str
 
 
@@ -117,7 +117,7 @@ class OutputAttributes(TypedDict):
     """Permitted attributes for `Output.output`."""
 
     message: str
-    target: str
+    target: Optional[str]
 
 
 class Output(TypedDict):
@@ -131,12 +131,11 @@ class Output(TypedDict):
 class SqlAttributes(TypedDict):
     """Permitted attributes for `Sql.sql`."""
 
-    dbms: str
-    endDelimiter: str
-    splitStatements: bool
+    dbms: Optional[str]
+    endDelimiter: Optional[str]
+    splitStatements: Optional[str]
     sql: str
-    stripComments: bool
-    comment: str
+    stripComments: Optional[bool]
 
 
 class Sql(TypedDict):
@@ -150,13 +149,13 @@ class Sql(TypedDict):
 class SqlFileAttributes(TypedDict):
     """Permitted attributes for `SqlFile.sqlFile`."""
 
-    dbms: str
-    encoding: str
-    endDelimiter: str
+    dbms: Optional[str]
+    encoding: Optional[str]
+    endDelimiter: Optional[str]
     path: str
-    relativeToChangelogFile: bool
-    splitStatements: bool
-    stripComments: bool
+    relativeToChangelogFile: Optional[bool]
+    splitStatements: Optional[bool]
+    stripComments: Optional[bool]
 
 
 class SqlFile(TypedDict):
