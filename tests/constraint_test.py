@@ -11,8 +11,11 @@ sys.path.insert(0, parent_dir)
 from liquibase.constraint import (
     AddCheckConstraint,
     AddDefaultValue,
+    AddForeignKeyConstraint,
     CheckConstraint,
     DefaultValue,
+    ForeignKeyConstraint,
+    NotNullConstraint,
 )
 
 
@@ -129,6 +132,113 @@ class TestAddDefaultValue(unittest.TestCase):
 
         # Test instance attribute
         self.assertEqual(add_default_value["defaultValue"], default_value)
+
+
+class TestForeignKeyConstraint(unittest.TestCase):
+    def test_foreign_key_constraint(self):
+        # Define test data
+        test_data: ForeignKeyConstraint = {
+            "baseColumnNames": "id",
+            "baseTableCatalogName": "orders",
+            "baseTableName": "orders",
+            "baseTableSchemaName": "public",
+            "constraintName": "fk_orders_customer_id",
+            "deferrable": True,
+            "initiallyDeferred": True,
+            "onDelete": "SET NULL",
+            "onUpdate": "SET NULL",
+            "referencedColumnNames": "id",
+            "referencedTableCatalogName": "customers",
+            "referencedTableName": "customers",
+            "referencedTableSchemaName": "public",
+            "validate": True,
+        }
+
+        # Create instance of ForeignKeyConstraint
+        default_value = ForeignKeyConstraint(**test_data)
+
+        # Test instance attributes
+        self.assertEqual(default_value["baseColumnNames"], test_data["baseColumnNames"])
+        self.assertEqual(
+            default_value["baseTableCatalogName"], test_data["baseTableCatalogName"]
+        )
+        self.assertEqual(default_value["baseTableName"], test_data["baseTableName"])
+        self.assertEqual(
+            default_value["baseTableSchemaName"], test_data["baseTableSchemaName"]
+        )
+        self.assertEqual(default_value["constraintName"], test_data["constraintName"])
+        self.assertEqual(default_value["deferrable"], test_data["deferrable"])
+        self.assertEqual(
+            default_value["initiallyDeferred"], test_data["initiallyDeferred"]
+        )
+        self.assertEqual(default_value["onDelete"], test_data["onDelete"])
+        self.assertEqual(default_value["onUpdate"], test_data["onUpdate"])
+        self.assertEqual(
+            default_value["referencedColumnNames"], test_data["referencedColumnNames"]
+        )
+        self.assertEqual(
+            default_value["referencedTableCatalogName"],
+            test_data["referencedTableCatalogName"],
+        )
+        self.assertEqual(
+            default_value["referencedTableName"], test_data["referencedTableName"]
+        )
+        self.assertEqual(
+            default_value["referencedTableSchemaName"],
+            test_data["referencedTableSchemaName"],
+        )
+        self.assertEqual(default_value["validate"], test_data["validate"])
+
+
+class TestAddForeignKeyConstraint(unittest.TestCase):
+    def test_add_foreign_key_constraint(self):
+        test_data = {}
+        # Create instance of ForeignKeyConstraint
+        foreign_key_constraint = ForeignKeyConstraint(**test_data)
+        # Create instance of AddForeignKeyConstraint
+        add_foreign_key_constraint = AddForeignKeyConstraint(
+            addForeignKeyConstraint=foreign_key_constraint
+        )
+
+        # Test instance attribute
+        self.assertEqual(
+            add_foreign_key_constraint["addForeignKeyConstraint"],
+            foreign_key_constraint,
+        )
+
+
+class TestNotNullConstraint(unittest.TestCase):
+    def test_not_null_constraint(self):
+        # Define test data
+        test_data = {
+            "catalogName": "customer",
+            "columnDataType": "varchar(55)",
+            "columnName": "name",
+            "constraintName": "customer_name",
+            "defaultNullValue": "John",
+            "schemaName": "public",
+            "tableName": "customer",
+            "validate": True,
+        }
+
+        # Create instance of NotNullConstraint
+        not_null_constraint = NotNullConstraint(**test_data)
+
+        # Test instance attribute
+        self.assertEqual(not_null_constraint["catalogName"], test_data["catalogName"])
+        self.assertEqual(
+            not_null_constraint["columnDataType"], test_data["columnDataType"]
+        )
+        self.assertEqual(not_null_constraint["columnName"], test_data["columnName"])
+        self.assertEqual(
+            not_null_constraint["constraintName"], test_data["constraintName"]
+        )
+        self.assertEqual(
+            not_null_constraint["defaultNullValue"], test_data["defaultNullValue"]
+        )
+        self.assertEqual(not_null_constraint["schemaName"], test_data["schemaName"])
+        self.assertEqual(not_null_constraint["tableName"], test_data["tableName"])
+        self.assertEqual(not_null_constraint["validate"], test_data["validate"])
 
 
 if __name__ == "__main__":
