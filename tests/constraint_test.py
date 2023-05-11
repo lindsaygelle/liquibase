@@ -12,10 +12,13 @@ from liquibase.constraint import (
     AddCheckConstraint,
     AddDefaultValue,
     AddForeignKeyConstraint,
+    AddNotNullConstraint,
+    AddPrimaryKey,
     CheckConstraint,
     DefaultValue,
     ForeignKeyConstraint,
     NotNullConstraint,
+    PrimaryKey,
 )
 
 
@@ -192,7 +195,7 @@ class TestForeignKeyConstraint(unittest.TestCase):
 
 class TestAddForeignKeyConstraint(unittest.TestCase):
     def test_add_foreign_key_constraint(self):
-        test_data = {}
+        test_data: ForeignKeyConstraint = {}
         # Create instance of ForeignKeyConstraint
         foreign_key_constraint = ForeignKeyConstraint(**test_data)
         # Create instance of AddForeignKeyConstraint
@@ -210,8 +213,8 @@ class TestAddForeignKeyConstraint(unittest.TestCase):
 class TestNotNullConstraint(unittest.TestCase):
     def test_not_null_constraint(self):
         # Define test data
-        test_data = {
-            "catalogName": "customer",
+        test_data: NotNullConstraint = {
+            "catalogName": "my_catalog",
             "columnDataType": "varchar(55)",
             "columnName": "name",
             "constraintName": "customer_name",
@@ -239,6 +242,76 @@ class TestNotNullConstraint(unittest.TestCase):
         self.assertEqual(not_null_constraint["schemaName"], test_data["schemaName"])
         self.assertEqual(not_null_constraint["tableName"], test_data["tableName"])
         self.assertEqual(not_null_constraint["validate"], test_data["validate"])
+
+
+class TestAddNotNullConstraint(unittest.TestCase):
+    def test_add_not_null_constraint(self):
+        test_data: NotNullConstraint = {}
+        # Create instance of NotNullConstraint
+        not_null_constraint = NotNullConstraint(**test_data)
+        # Create instance of AddForeignKeyConstraint
+        add_not_null_constraint = AddNotNullConstraint(
+            addNotNullConstraint=not_null_constraint
+        )
+
+        # Test instance attribute
+        self.assertEqual(
+            add_not_null_constraint["addNotNullConstraint"],
+            not_null_constraint,
+        )
+
+
+class TestPrimaryKey(unittest.TestCase):
+    def test_primary_key(self):
+        # Define test data
+        test_data: PrimaryKey = {
+            "catalogName": "my_catalog",
+            "clustered": True,
+            "columnNames": "id",
+            "constraintName": "my_pk_constraint",
+            "forIndexCatalogName": "my_index_catalog",
+            "forIndexName": "my_index_name",
+            "forIndexSchemaName": "my_index_schema",
+            "schemaName": "my_schema",
+            "tableName": "my_table",
+            "tablespace": "my_tablespace",
+            "validate": True,
+        }
+
+        # Create instance of PrimaryKey
+        primary_key = PrimaryKey(**test_data)
+
+        self.assertEqual(primary_key["catalogName"], test_data["catalogName"])
+        self.assertEqual(primary_key["clustered"], test_data["clustered"])
+        self.assertEqual(primary_key["columnNames"], test_data["columnNames"])
+        self.assertEqual(primary_key["constraintName"], test_data["constraintName"])
+        self.assertEqual(
+            primary_key["forIndexCatalogName"], test_data["forIndexCatalogName"]
+        )
+        self.assertEqual(primary_key["forIndexName"], test_data["forIndexName"])
+        self.assertEqual(
+            primary_key["forIndexSchemaName"], test_data["forIndexSchemaName"]
+        )
+        self.assertEqual(primary_key["schemaName"], test_data["schemaName"])
+        self.assertEqual(primary_key["tableName"], test_data["tableName"])
+        self.assertEqual(primary_key["tablespace"], test_data["tablespace"])
+        self.assertEqual(primary_key["validate"], test_data["validate"])
+
+
+class TestAddPrimaryKey(unittest.TestCase):
+    def test_add_primary_key(self):
+        # Define test data
+        test_data: PrimaryKey = {}
+        # Create instance of NotNullConstraint
+        primary_key = PrimaryKey(**test_data)
+        # Create instance of AddForeignKeyConstraint
+        add_primary_key = AddPrimaryKey(addPrimaryKey=primary_key)
+
+        # Test instance attribute
+        self.assertEqual(
+            add_primary_key["addPrimaryKey"],
+            primary_key,
+        )
 
 
 if __name__ == "__main__":
