@@ -14,11 +14,13 @@ from liquibase.constraint import (
     AddForeignKeyConstraint,
     AddNotNullConstraint,
     AddPrimaryKey,
+    AddUniqueConstraint,
     CheckConstraint,
     DefaultValue,
     ForeignKeyConstraint,
     NotNullConstraint,
     PrimaryKey,
+    UniqueConstraint,
 )
 
 
@@ -71,7 +73,7 @@ class TestAddCheckConstraint(unittest.TestCase):
         # Create instance of AddCheckConstraint
         add_check_constraint = AddCheckConstraint(addCheckConstraint=check_constraint)
 
-        # Test instance attribute
+        # Test instance attributes
         self.assertEqual(add_check_constraint["addCheckConstraint"], check_constraint)
 
 
@@ -133,7 +135,7 @@ class TestAddDefaultValue(unittest.TestCase):
         # Create instance of AddDefaultValue
         add_default_value = AddDefaultValue(defaultValue=default_value)
 
-        # Test instance attribute
+        # Test instance attributes
         self.assertEqual(add_default_value["defaultValue"], default_value)
 
 
@@ -203,7 +205,7 @@ class TestAddForeignKeyConstraint(unittest.TestCase):
             addForeignKeyConstraint=foreign_key_constraint
         )
 
-        # Test instance attribute
+        # Test instance attributes
         self.assertEqual(
             add_foreign_key_constraint["addForeignKeyConstraint"],
             foreign_key_constraint,
@@ -227,7 +229,7 @@ class TestNotNullConstraint(unittest.TestCase):
         # Create instance of NotNullConstraint
         not_null_constraint = NotNullConstraint(**test_data)
 
-        # Test instance attribute
+        # Test instance attributes
         self.assertEqual(not_null_constraint["catalogName"], test_data["catalogName"])
         self.assertEqual(
             not_null_constraint["columnDataType"], test_data["columnDataType"]
@@ -254,7 +256,7 @@ class TestAddNotNullConstraint(unittest.TestCase):
             addNotNullConstraint=not_null_constraint
         )
 
-        # Test instance attribute
+        # Test instance attributes
         self.assertEqual(
             add_not_null_constraint["addNotNullConstraint"],
             not_null_constraint,
@@ -307,10 +309,76 @@ class TestAddPrimaryKey(unittest.TestCase):
         # Create instance of AddForeignKeyConstraint
         add_primary_key = AddPrimaryKey(addPrimaryKey=primary_key)
 
-        # Test instance attribute
+        # Test instance attributes
         self.assertEqual(
             add_primary_key["addPrimaryKey"],
             primary_key,
+        )
+
+
+class TestUniqueConstraint(unittest.TestCase):
+    def test_unique_constraint(self):
+        # Define test data
+        test_data: UniqueConstraint = {
+            "catalogName": "my_catalog",
+            "clustered": True,
+            "columnNames": "name",
+            "constraintName": "my_unique_constraint",
+            "deferrable": True,
+            "disabled": False,
+            "forIndexCatalogName": "my_index_catalog",
+            "forIndexName": "my_index_name",
+            "forIndexSchemaName": "my_index_schema",
+            "initiallyDeferred": False,
+            "schemaName": "my_schema",
+            "tableName": "my_table",
+            "tablespace": "my_tablespace",
+            "validate": True,
+        }
+
+        # Create instance of UniqueConstraint
+        unique_constraint = UniqueConstraint(**test_data)
+
+        # Test instance attributes
+        self.assertEqual(unique_constraint["catalogName"], test_data["catalogName"])
+        self.assertEqual(unique_constraint["clustered"], test_data["clustered"])
+        self.assertEqual(unique_constraint["columnNames"], test_data["columnNames"])
+        self.assertEqual(
+            unique_constraint["constraintName"], test_data["constraintName"]
+        )
+        self.assertEqual(unique_constraint["deferrable"], test_data["deferrable"])
+        self.assertEqual(unique_constraint["disabled"], test_data["disabled"])
+        self.assertEqual(
+            unique_constraint["forIndexCatalogName"], test_data["forIndexCatalogName"]
+        )
+        self.assertEqual(unique_constraint["forIndexName"], test_data["forIndexName"])
+        self.assertEqual(
+            unique_constraint["forIndexSchemaName"], test_data["forIndexSchemaName"]
+        )
+        self.assertEqual(
+            unique_constraint["initiallyDeferred"], test_data["initiallyDeferred"]
+        )
+        self.assertEqual(unique_constraint["schemaName"], test_data["schemaName"])
+        self.assertEqual(unique_constraint["tableName"], test_data["tableName"])
+        self.assertEqual(unique_constraint["tablespace"], test_data["tablespace"])
+        self.assertEqual(unique_constraint["validate"], test_data["validate"])
+
+
+class TestAddUniqueConstraint(unittest.TestCase):
+    def test_add_unique_constraint(self):
+        # Define test data
+        test_data: UniqueConstraint = {}
+        # Create instance of UniqueConstraint
+        unique_constraint = UniqueConstraint(**test_data)
+        # Create instance of AddForeignKeyConstraint
+        add_unique_constraint = AddUniqueConstraint(
+            addUniqueConstraint=unique_constraint
+        )
+
+        # Test instance attributes
+        self.assertEqual(
+            add_unique_constraint["addUniqueConstraint"],
+            unique_constraint,
         )
 
 
