@@ -1,4 +1,5 @@
 # pylint: disable=C0114,C0115,C0116
+from datetime import datetime
 import os
 import sys
 import unittest
@@ -8,7 +9,7 @@ parent_dir = os.path.abspath(os.path.join(current_file_dir, ".."))
 sys.path.insert(0, parent_dir)
 
 # pylint: disable=C0413
-from liquibase.data import AddLookupTable, LookupTable
+from liquibase.data import AddLookupTable, LookupTable, Param, WhereParam
 
 
 class TestLookupTable(unittest.TestCase):
@@ -59,7 +60,7 @@ class TestLookupTable(unittest.TestCase):
         )
 
 
-class AddTestLookupTable(unittest.TestCase):
+class TestAddLookupTable(unittest.TestCase):
     def test_add_lookup_table(self):
         # Define test data
         test_data: LookupTable = {}
@@ -67,13 +68,61 @@ class AddTestLookupTable(unittest.TestCase):
         # Create instance of LookupTable
         lookup_table = LookupTable(**test_data)
 
-        # Create instance of AddForeignKeyConstraint
+        # Create instance of AddLookupTable
         add_lookup_table = AddLookupTable(addLookupTable=lookup_table)
 
         # Test instance attributes
         self.assertEqual(
             add_lookup_table["addLookupTable"],
             lookup_table,
+        )
+
+
+class TestParam(unittest.TestCase):
+    def test_param(self):
+        # Define test data
+        test_data: Param = {
+            "name": "A",
+            "value": "VARCHAR(255)",
+            "valueNumeric": 1,
+            "valueBoolean": False,
+            "valueDate": f"{datetime.now()}",
+            "valueComputed": "CURRENT_TIME",
+            "valueSequenceNext": "seq1",
+            "valueSequenceCurrent": "seq2",
+        }
+
+        # Create instance of Param
+        param = Param(**test_data)
+
+        # Test instance attributes
+        self.assertEqual(param["name"], test_data["name"])
+        self.assertEqual(param["value"], test_data["value"])
+        self.assertEqual(param["valueNumeric"], test_data["valueNumeric"])
+        self.assertEqual(param["valueBoolean"], test_data["valueBoolean"])
+        self.assertEqual(param["valueDate"], test_data["valueDate"])
+        self.assertEqual(param["valueComputed"], test_data["valueComputed"])
+        self.assertEqual(param["valueSequenceNext"], test_data["valueSequenceNext"])
+        self.assertEqual(
+            param["valueSequenceCurrent"], test_data["valueSequenceCurrent"]
+        )
+
+
+class TestWhereParam(unittest.TestCase):
+    def test_where_param(self):
+        # Define test data
+        test_data: LookupTable = {}
+
+        # Create instance of Param
+        param = Param(**test_data)
+
+        # Create instance of WhereParam
+        where_param = WhereParam(param=param)
+
+        # Test instance attributes
+        self.assertEqual(
+            where_param["param"],
+            param,
         )
 
 
