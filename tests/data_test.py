@@ -20,6 +20,8 @@ from liquibase.data import (
     LoadAttributes,
     LoadData,
     LoadDataAttributes,
+    LoadUpdateDataAttributes,
+    LoadUpdateData,
     LookupTable,
     Param,
     WhereParam,
@@ -369,21 +371,7 @@ class TestLoadDataAttributes(unittest.TestCase):
 class TestLoadData(unittest.TestCase):
     def test_load_data(self):
         # Define test data
-        test_data: LoadDataAttributes = {
-            "catalogName": "my_catalog",
-            "columns": [],
-            "commentLineStartsWith": "test",
-            "encoding": "utf-8",
-            "file": "my_file.sql",
-            "onlyUpdate": True,
-            "primaryKey": False,
-            "quotchar": "'",
-            "relativeToChangelogFile": True,
-            "schemaName": "my_schema",
-            "separator": "",
-            "tableName": "my_table",
-            "usePreparedStatements": False,
-        }
+        test_data: LoadDataAttributes = {}
 
         # Create instance of LoadDataAttributes
         load_data_attributes = LoadDataAttributes(**test_data)
@@ -395,6 +383,24 @@ class TestLoadData(unittest.TestCase):
         self.assertEqual(
             load_data["loadData"],
             load_data_attributes,
+        )
+
+
+class TestLoadUpdateData(unittest.TestCase):
+    def test_load_update_data(self):
+        # Define test data
+        test_data: LoadUpdateDataAttributes = {}
+
+        # Create instance of LoadDataAttributes
+        load_update_data_attributes = LoadUpdateDataAttributes(**test_data)
+
+        # Create instance of LoadUpdateData
+        load_update_data = LoadUpdateData(loadUpdateData=load_update_data_attributes)
+
+        # Test instance attributes
+        self.assertEqual(
+            load_update_data["loadUpdateData"],
+            load_update_data_attributes,
         )
 
 
