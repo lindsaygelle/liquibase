@@ -17,6 +17,9 @@ from liquibase.data import (
     DeleteAttributes,
     Insert,
     InsertAttributes,
+    LoadAttributes,
+    LoadData,
+    LoadDataAttributes,
     LookupTable,
     Param,
     WhereParam,
@@ -272,6 +275,126 @@ class TestColumn(unittest.TestCase):
         self.assertEqual(
             column["column"],
             column_attributes,
+        )
+
+
+class TestLoadAttributes(unittest.TestCase):
+    def test_load_attributes(self):
+        # Define test data
+        test_data: LoadAttributes = {
+            "catalogName": "my_catalog",
+            "columns": [],
+            "commentLineStartsWith": "test",
+            "encoding": "utf-8",
+            "file": "my_file.sql",
+            "quotchar": "'",
+            "relativeToChangelogFile": True,
+            "schemaName": "my_schema",
+            "separator": "",
+            "tableName": "my_table",
+            "usePreparedStatements": False,
+        }
+
+        # Create instance of LoadAttributes
+        load_attributes = LoadAttributes(**test_data)
+
+        # Test instance attributes
+        self.assertEqual(load_attributes["catalogName"], test_data["catalogName"])
+        self.assertEqual(load_attributes["columns"], test_data["columns"])
+        self.assertEqual(
+            load_attributes["commentLineStartsWith"], test_data["commentLineStartsWith"]
+        )
+        self.assertEqual(load_attributes["encoding"], test_data["encoding"])
+        self.assertEqual(load_attributes["file"], test_data["file"])
+        self.assertEqual(load_attributes["quotchar"], test_data["quotchar"])
+        self.assertEqual(
+            load_attributes["relativeToChangelogFile"],
+            test_data["relativeToChangelogFile"],
+        )
+        self.assertEqual(load_attributes["schemaName"], test_data["schemaName"])
+        self.assertEqual(load_attributes["separator"], test_data["separator"])
+        self.assertEqual(load_attributes["tableName"], test_data["tableName"])
+        self.assertEqual(
+            load_attributes["usePreparedStatements"], test_data["usePreparedStatements"]
+        )
+
+
+class TestLoadDataAttributes(unittest.TestCase):
+    def test_load_data_attributes(self):
+        # Define test data
+        test_data: LoadDataAttributes = {
+            "catalogName": "my_catalog",
+            "columns": [],
+            "commentLineStartsWith": "test",
+            "encoding": "utf-8",
+            "file": "my_file.sql",
+            "onlyUpdate": True,
+            "primaryKey": False,
+            "quotchar": "'",
+            "relativeToChangelogFile": True,
+            "schemaName": "my_schema",
+            "separator": "",
+            "tableName": "my_table",
+            "usePreparedStatements": False,
+        }
+
+        # Create instance of LoadDataAttributes
+        load_data_attributes = LoadDataAttributes(**test_data)
+
+        # Test instance attributes
+        self.assertEqual(load_data_attributes["catalogName"], test_data["catalogName"])
+        self.assertEqual(load_data_attributes["columns"], test_data["columns"])
+        self.assertEqual(
+            load_data_attributes["commentLineStartsWith"],
+            test_data["commentLineStartsWith"],
+        )
+        self.assertEqual(load_data_attributes["encoding"], test_data["encoding"])
+        self.assertEqual(load_data_attributes["file"], test_data["file"])
+        self.assertEqual(load_data_attributes["onlyUpdate"], test_data["onlyUpdate"])
+        self.assertEqual(load_data_attributes["primaryKey"], test_data["primaryKey"])
+        self.assertEqual(load_data_attributes["quotchar"], test_data["quotchar"])
+        self.assertEqual(
+            load_data_attributes["relativeToChangelogFile"],
+            test_data["relativeToChangelogFile"],
+        )
+        self.assertEqual(load_data_attributes["schemaName"], test_data["schemaName"])
+        self.assertEqual(load_data_attributes["separator"], test_data["separator"])
+        self.assertEqual(load_data_attributes["tableName"], test_data["tableName"])
+        self.assertEqual(
+            load_data_attributes["usePreparedStatements"],
+            test_data["usePreparedStatements"],
+        )
+
+
+class TestLoadData(unittest.TestCase):
+    def test_load_data(self):
+        # Define test data
+        test_data: LoadDataAttributes = {
+            "catalogName": "my_catalog",
+            "columns": [],
+            "commentLineStartsWith": "test",
+            "encoding": "utf-8",
+            "file": "my_file.sql",
+            "onlyUpdate": True,
+            "primaryKey": False,
+            "quotchar": "'",
+            "relativeToChangelogFile": True,
+            "schemaName": "my_schema",
+            "separator": "",
+            "tableName": "my_table",
+            "usePreparedStatements": False,
+        }
+
+        # Create instance of LoadDataAttributes
+        load_data_attributes = LoadDataAttributes(**test_data)
+
+        # Create instance of LoadData
+        load_data = LoadData(loadData=load_data_attributes)
+
+        # Test instance attributes
+        self.assertEqual(
+            load_data["loadData"],
+            load_data_attributes,
         )
 
 
