@@ -11,6 +11,7 @@ sys.path.insert(0, parent_dir)
 # pylint: disable=C0413
 from liquibase.data import (
     AddLookupTable,
+    Column,
     ColumnAttributes,
     Delete,
     DeleteAttributes,
@@ -251,9 +252,27 @@ class TestColumnAttributes(unittest.TestCase):
 
         # Test instance attributes
         self.assertEqual(column_attributes["header"], test_data["header"])
-        self.assertEqual(column_attributes["index"], test_data["header"])
-        self.assertEqual(column_attributes["name"], test_data["header"])
-        self.assertEqual(column_attributes["type"], test_data["header"])
+        self.assertEqual(column_attributes["index"], test_data["index"])
+        self.assertEqual(column_attributes["name"], test_data["name"])
+        self.assertEqual(column_attributes["type"], test_data["type"])
+
+
+class TestColumn(unittest.TestCase):
+    def test_column(self):
+        # Define test data
+        test_data: ColumnAttributes = {}
+
+        # Create instance of ColumnAttributes
+        column_attributes = ColumnAttributes(**test_data)
+
+        # Create instance of Column
+        column = Column(column=column_attributes)
+
+        # Test instance attributes
+        self.assertEqual(
+            column["column"],
+            column_attributes,
+        )
 
 
 if __name__ == "__main__":
