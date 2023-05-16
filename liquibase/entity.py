@@ -13,7 +13,7 @@ class AutoIncrement(TypedDict):
     incrementBy: Optional[int]
     schemaName: Optional[str]
     startWith: Optional[str]
-    tableName: Optional[str]
+    tableName: str
 
 
 class AddAutoIncrement(TypedDict):
@@ -24,61 +24,68 @@ class AddAutoIncrement(TypedDict):
     addAutoIncrement: AutoIncrement
 
 
+class ColumnConstraintGenerated(TypedDict):
+    """Permitted attributes for `ColumnConstraint.generated`."""
+
+    onUpdate: Optional[bool]
+
+
 class ColumnConstraint(TypedDict):
     """Permitted attributes for `Column.constraints`."""
 
-    checkConstraint: bool
-    deferrable: bool
-    deleteCascade: bool
-    foreignKeyName: str
-    initiallyDeferred: bool
-    notNullConstraintName: str
-    nullable: bool
-    primaryKey: bool
-    primaryKeyName: str
-    primaryKeyTablespace: str
-    referencedColumnNames: str
-    referencedTableCatalogName: str
-    referencedTableName: str
-    referencedTableSchemaName: str
-    references: str
-    unique: str
-    uniqueConstraintName: str
-    validateForeignKey: bool
-    validateNullable: bool
-    validatePrimaryKey: bool
-    validateUnique: bool
+    checkConstraint: Optional[bool]
+    deferrable: Optional[bool]
+    deleteCascade: Optional[bool]
+    foreignKeyName: Optional[str]
+    generated: Optional[ColumnConstraintGenerated]
+    initiallyDeferred: Optional[bool]
+    notNullConstraintName: Optional[str]
+    nullable: Optional[bool]
+    primaryKey: Optional[bool]
+    primaryKeyName: Optional[str]
+    primaryKeyTablespace: Optional[str]
+    referencedColumnNames: Optional[str]
+    referencedTableCatalogName: Optional[str]
+    referencedTableName: Optional[str]
+    referencedTableSchemaName: Optional[str]
+    references: Optional[str]
+    unique: Optional[str]
+    uniqueConstraintName: Optional[str]
+    validateForeignKey: Optional[bool]
+    validateNullable: Optional[bool]
+    validatePrimaryKey: Optional[bool]
+    validateUnique: Optional[bool]
 
 
 class Column(TypedDict):
     """Permitted attributes for `AddColumn.column`."""
 
-    afterColumn: str
-    autoIncrement: bool
-    beforeColumn: str
-    computed: bool
-    constraints: ColumnConstraint
-    defaultValue: str
-    defaultValueBoolean: bool
-    defaultValueComputed: str
-    defaultValueConstraintName: str
-    defaultValueDate: str
-    defaultValueNumeric: int
-    descending: bool
-    encoding: str
-    incrementBy: int
+    afterColumn: Optional[str]
+    autoIncrement: Optional[bool]
+    beforeColumn: Optional[str]
+    computed: Optional[bool]
+    constraints: Optional[ColumnConstraint]
+    defaultValue: Optional[str]
+    defaultValueBoolean: Optional[bool]
+    defaultValueComputed: Optional[str]
+    defaultValueConstraintName: Optional[str]
+    defaultValueDate: Optional[str]
+    defaultValueNumeric: Optional[int]
+    descending: Optional[bool]
+    encoding: Optional[str]
+    incrementBy: Optional[int]
     name: str
-    position: int
-    remarks: str
-    startWith: str
+    position: Optional[int]
+    remarks: Optional[str]
+    startWith: Optional[str]
     type: str
     value: str
-    valueBlobFile: str
-    valueBoolean: bool
-    valueClobFile: str
-    valueComputed: str
-    valueDate: str
-    valueNumeric: int
+    valueBlobFile: Optional[str]
+    valueBoolean: Optional[bool]
+    valueClobFile: Optional[str]
+    valueComputed: Optional[str]
+    valueDate: Optional[str]
+    valueNumeric: Optional[int]
 
 
 class AddColumn(TypedDict):
