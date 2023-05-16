@@ -20,7 +20,11 @@ from liquibase.data import (
     LoadAttributes,
     LoadData,
     LoadDataAttributes,
+    LoadUpdateDataAttributes,
+    LoadUpdateData,
     LookupTable,
+    MergeColumn,
+    MergeColumns,
     Param,
     WhereParam,
 )
@@ -369,21 +373,7 @@ class TestLoadDataAttributes(unittest.TestCase):
 class TestLoadData(unittest.TestCase):
     def test_load_data(self):
         # Define test data
-        test_data: LoadDataAttributes = {
-            "catalogName": "my_catalog",
-            "columns": [],
-            "commentLineStartsWith": "test",
-            "encoding": "utf-8",
-            "file": "my_file.sql",
-            "onlyUpdate": True,
-            "primaryKey": False,
-            "quotchar": "'",
-            "relativeToChangelogFile": True,
-            "schemaName": "my_schema",
-            "separator": "",
-            "tableName": "my_table",
-            "usePreparedStatements": False,
-        }
+        test_data: LoadDataAttributes = {}
 
         # Create instance of LoadDataAttributes
         load_data_attributes = LoadDataAttributes(**test_data)
@@ -395,6 +385,79 @@ class TestLoadData(unittest.TestCase):
         self.assertEqual(
             load_data["loadData"],
             load_data_attributes,
+        )
+
+
+class TestLoadUpdateData(unittest.TestCase):
+    def test_load_update_data(self):
+        # Define test data
+        test_data: LoadUpdateDataAttributes = {}
+
+        # Create instance of LoadDataAttributes
+        load_update_data_attributes = LoadUpdateDataAttributes(**test_data)
+
+        # Create instance of LoadUpdateData
+        load_update_data = LoadUpdateData(loadUpdateData=load_update_data_attributes)
+
+        # Test instance attributes
+        self.assertEqual(
+            load_update_data["loadUpdateData"],
+            load_update_data_attributes,
+        )
+
+
+class TestMergeColumn(unittest.TestCase):
+    def test_merge_column(self):
+        # Define test data
+        test_data: MergeColumn = {
+            "catalogName": "my_catalog",
+            "column1Name": "column1",
+            "column2Name": "column2",
+            "finalColumnName": "merged_column",
+            "finalColumnType": "varchar(255)",
+            "joinString": ",",
+            "schemaName": "my_schema",
+            "tableName": "my_table",
+        }
+
+        # Create instance of MergeColumn
+        merge_column = MergeColumn(**test_data)
+
+        # Test instance attributes
+        self.assertEqual(merge_column["catalogName"], test_data["catalogName"])
+        self.assertEqual(merge_column["column1Name"], test_data["column1Name"])
+        self.assertEqual(merge_column["column2Name"], test_data["column2Name"])
+        self.assertEqual(merge_column["finalColumnName"], test_data["finalColumnName"])
+        self.assertEqual(merge_column["finalColumnType"], test_data["finalColumnType"])
+        self.assertEqual(merge_column["joinString"], test_data["joinString"])
+        self.assertEqual(merge_column["schemaName"], test_data["schemaName"])
+        self.assertEqual(merge_column["tableName"], test_data["tableName"])
+
+
+class TestMergeColumns(unittest.TestCase):
+    def test_merge_columns(self):
+        # Define test data
+        test_data: MergeColumn = {
+            "catalogName": "my_catalog",
+            "column1Name": "column1",
+            "column2Name": "column2",
+            "finalColumnName": "merged_column",
+            "finalColumnType": "varchar(255)",
+            "joinString": ",",
+            "schemaName": "my_schema",
+            "tableName": "my_table",
+        }
+
+        # Create instance of MergeColumn
+        merge_column = MergeColumn(**test_data)
+
+        # Create instance of MergeColumns
+        merge_columns = MergeColumns(mergeColumns=merge_column)
+
+        # Test instance attributes
+        self.assertEqual(
+            merge_columns["mergeColumns"],
+            merge_column,
         )
 
 
