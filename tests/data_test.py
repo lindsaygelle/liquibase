@@ -26,6 +26,8 @@ from liquibase.data import (
     MergeColumn,
     MergeColumns,
     Param,
+    UpdateAttributes,
+    Update,
     WhereParam,
 )
 
@@ -458,6 +460,58 @@ class TestMergeColumns(unittest.TestCase):
         self.assertEqual(
             merge_columns["mergeColumns"],
             merge_column,
+        )
+
+
+class TestUpdateAttributes(unittest.TestCase):
+    def test_update_attributes(self):
+        # Define test data
+        test_data: UpdateAttributes = {
+            "catalogName": "my_catalog",
+            "columnName": "my_column",
+            "newDataType": "varchar(255)",
+            "schemaName": "my_schema",
+            "tableName": "my_table",
+            "where": "id = 1",
+            "whereParam": [],
+        }
+
+        # Create instance of UpdateAttributes
+        update_attributes = UpdateAttributes(**test_data)
+
+        # Test instance attributes
+        self.assertEqual(update_attributes["catalogName"], test_data["catalogName"])
+        self.assertEqual(update_attributes["columnName"], test_data["columnName"])
+        self.assertEqual(update_attributes["newDataType"], test_data["newDataType"])
+        self.assertEqual(update_attributes["schemaName"], test_data["schemaName"])
+        self.assertEqual(update_attributes["tableName"], test_data["tableName"])
+        self.assertEqual(update_attributes["where"], test_data["where"])
+        self.assertEqual(update_attributes["whereParam"], test_data["whereParam"])
+
+
+class TestUpdate(unittest.TestCase):
+    def test_update(self):
+        # Define test data
+        test_data: UpdateAttributes = {
+            "catalogName": "my_catalog",
+            "columnName": "my_column",
+            "newDataType": "varchar(255)",
+            "schemaName": "my_schema",
+            "tableName": "my_table",
+            "where": "id = 1",
+            "whereParam": [],
+        }
+
+        # Create instance of UpdateAttributes
+        update_attributes = UpdateAttributes(**test_data)
+
+        # Create instance of Update
+        update = Update(update=update_attributes)
+
+        # Test instance attributes
+        self.assertEqual(
+            update["update"],
+            update_attributes,
         )
 
 
