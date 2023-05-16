@@ -13,7 +13,7 @@ class AutoIncrement(TypedDict):
     incrementBy: Optional[int]
     schemaName: Optional[str]
     startWith: Optional[str]
-    tableName: Optional[str]
+    tableName: str
 
 
 class AddAutoIncrement(TypedDict):
