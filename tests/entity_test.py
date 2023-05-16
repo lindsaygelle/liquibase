@@ -52,8 +52,8 @@ class TestAddAutoIncrement(unittest.TestCase):
         auto_increment = AutoIncrement(**test_data)
         add_auto_increment = AddAutoIncrement(addAutoIncrement=auto_increment)
         self.assertEqual(
-            auto_increment["addAutoIncrement"],
-            add_auto_increment,
+            add_auto_increment["addAutoIncrement"],
+            auto_increment,
         )
 
 
