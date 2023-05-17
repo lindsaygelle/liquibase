@@ -57,7 +57,7 @@ class ColumnConstraint(TypedDict):
     validateUnique: Optional[bool]
 
 
-class Column(TypedDict):
+class ColumnAttributes(TypedDict):
     """Permitted attributes for `AddColumn.column`."""
 
     afterColumn: Optional[str]
@@ -86,6 +86,12 @@ class Column(TypedDict):
     valueComputed: Optional[str]
     valueDate: Optional[str]
     valueNumeric: Optional[int]
+
+
+class Column(TypedDict):
+    """Permitted attributes for `AddColumn.columns[*]`."""
+
+    column: ColumnAttributes
 
 
 class AddColumn(TypedDict):
@@ -266,17 +272,11 @@ class CreateSynonym(TypedDict):
     createSynonym: Synonym
 
 
-class TableColumn(TypedDict):
-    """Permitted attributes for `CreateTable.columns[*]`."""
-
-    column: Column
-
-
 class Table(TypedDict):
     """Permitted attributes for `CreateTable.createTable`."""
 
     catalogName: Optional[str]
-    columns: List[TableColumn]
+    columns: List[Column]
     remarks: Optional[str]
     schemaName: Optional[str]
     tableName: str
