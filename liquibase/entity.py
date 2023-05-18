@@ -89,19 +89,25 @@ class ColumnAttributes(TypedDict):
 
 
 class Column(TypedDict):
-    """Permitted attributes for `AddColumn.columns[*]`."""
+    """Permitted attributes for `AddColumnAttributes.columns[*]`."""
 
     column: ColumnAttributes
+
+
+class AddColumnAttributes(TypedDict):
+    """Permitted attributes for `AddColumn.addColumn`."""
+
+    catalogName: Optional[str]
+    columns: List[Column]
+    schemaName: Optional[str]
+    tableName: str
 
 
 class AddColumn(TypedDict):
     """Permitted attributes for change
     [addColumn](https://docs.liquibase.com/change-types/add-column.html)."""
 
-    catalogName: Optional[str]
-    columns: List[Column]
-    schemaName: Optional[str]
-    tableName: str
+    addColumn: AddColumnAttributes
 
 
 class Sequence(TypedDict):
