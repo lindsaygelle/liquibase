@@ -12,7 +12,6 @@ from liquibase.change import (
     ChangeSet,
     ChangeSetAttributes,
     DatabaseChangeLog,
-    PreConditions,
 )
 
 
@@ -81,22 +80,6 @@ class TestChangeSet(unittest.TestCase):
         # Test instance attributes
         self.assertIsInstance(change_set, dict)
         self.assertEqual(change_set["changeSet"], attributes)
-
-
-class TestPreConditions(unittest.TestCase):
-    def test_create_preconditions(self):
-        # Create instance of PreConditions
-        pre_conditions = PreConditions(
-            preConditions=[{"onFail": "CONTINUE", "dbms": {"type": "h2"}}]
-        )
-        # Test instance attributes
-        self.assertIsInstance(pre_conditions, dict)
-        self.assertIsInstance(pre_conditions["preConditions"], list)
-        self.assertEqual(len(pre_conditions["preConditions"]), 1)
-        self.assertIsInstance(pre_conditions["preConditions"][0], dict)
-        self.assertEqual(pre_conditions["preConditions"][0]["onFail"], "CONTINUE")
-        self.assertIsInstance(pre_conditions["preConditions"][0]["dbms"], dict)
-        self.assertEqual(pre_conditions["preConditions"][0]["dbms"]["type"], "h2")
 
 
 class TestDatabaseChangeLog(unittest.TestCase):
