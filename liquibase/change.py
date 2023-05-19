@@ -5,6 +5,7 @@ from liquibase import constraint
 from liquibase import data
 from liquibase import entity
 from liquibase import miscellaneous
+from liquibase import precondition
 
 ChangeConstraint = Union[
     constraint.AddCheckConstraint,
@@ -44,8 +45,6 @@ ChangeEntity = Union[
 
 Changes = Union[ChangeConstraint, ChangeData, ChangeEntity]
 
-PreCondition = Dict[str, Dict[str, Dict[str, Any]]]
-
 ObjectQuotingStrategy = Literal[
     "LEGACY", "QUOTE_ALL_OBJECTS", "QUOTE_ONLY_RESERVED_WORDS"
 ]
@@ -70,7 +69,7 @@ class ChangeSetAttributes(TypedDict):
     labels: Optional[str]
     logicalFilePath: Optional[str]
     objectQuotingStrategy: Optional[ObjectQuotingStrategy]
-    preConditions: List[PreCondition]
+    preConditions: List[precondition.PreCondition]
     rollback: Optional[Rollback]
     runAlways: Optional[bool]
     runInTransaction: Optional[bool]
@@ -99,17 +98,9 @@ class Property(TypedDict):
     value: str
 
 
-class PreConditions(TypedDict):
-    """Permitted attributes for
-    [preConditions](https://docs.liquibase.com/concepts/changelogs/preconditions.html).
-    """
-
-    preConditions: List[PreCondition]
-
-
 ChangeLog = Union[
     ChangeSet,
-    PreConditions,
+    precondition.PreConditions,
     Property,
     miscellaneous.Include,
     miscellaneous.IncludeAll,
