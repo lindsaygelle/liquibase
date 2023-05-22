@@ -89,6 +89,7 @@ class SqlCheckAttributes(TypedDict):
     """Permitted attributes for `SqlCheck.sqlCheck`."""
 
     expectedResult: str
+    query: str
 
 
 class SqlCheck(TypedDict):
