@@ -88,7 +88,7 @@ class Dbms(TypedDict):
 class SqlCheckAttributes(TypedDict):
     """Permitted attributes for `SqlCheck.sqlCheck`."""
 
-    expectedResult: Union[int | str]
+    expectedResult: Union[int, str]
     sql: str
 
 
