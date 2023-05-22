@@ -1,5 +1,5 @@
 # pylint: disable=C0103,R,C0114
-from typing import Any, List, Literal, Optional, TypedDict
+from typing import Any, List, Literal, Optional, TypedDict, Union
 
 
 class ColumnExistsAttributes(TypedDict):
@@ -88,8 +88,8 @@ class Dbms(TypedDict):
 class SqlCheckAttributes(TypedDict):
     """Permitted attributes for `SqlCheck.sqlCheck`."""
 
-    expectedResult: str
-    query: str
+    expectedResult: Union[int | str]
+    sql: str
 
 
 class SqlCheck(TypedDict):
