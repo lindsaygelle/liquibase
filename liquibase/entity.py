@@ -344,3 +344,52 @@ class CreateView(TypedDict):
     [createView](https://docs.liquibase.com/change-types/create-view.html)."""
 
     view: View
+
+
+class DisableTriggerAttributes(TypedDict):
+    """Permitted attributes for `DisableTrigger.disableTrigger`."""
+
+    catalogName: Optional[str]
+    schemaName: Optional[str]
+    scope: Optional[str]
+    tableName: Optional[str]
+    triggerName: str
+
+
+class DisableTrigger(TypedDict):
+    """Permitted attributes for change
+    [disableTrigger](https://docs.liquibase.com/change-types/disable-trigger.html)."""
+
+    disableTrigger: DisableTriggerAttributes
+
+
+class DropColumnAttributes(TypedDict):
+    """Permitted attributes for `DropColumn.dropColumn`."""
+
+    catalogName: Optional[str]
+    columns: Optional[List[Column]]
+    columnName: Optional[str]
+    schemaName: Optional[str]
+    tableName: str
+
+
+class DropColumn(TypedDict):
+    """Permitted attributes for change
+    [dropColumn](https://docs.liquibase.com/change-types/drop-column.html)."""
+
+    dropColumn: DropColumnAttributes
+
+
+class DropFunctionAttributes(TypedDict):
+    """Permitted attributes for `DropFunction.dropFunction`."""
+
+    catalogName: Optional[str]
+    functionName: str
+    schemaName: Optional[str]
+
+
+class DropFunction(TypedDict):
+    """Permitted attributes for change
+    [dropFunction](https://docs.liquibase.com/change-types/drop-function.html)."""
+
+    dropFunction: DropFunctionAttributes
