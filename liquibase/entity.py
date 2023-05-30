@@ -393,3 +393,50 @@ class DropFunction(TypedDict):
     [dropFunction](https://docs.liquibase.com/change-types/drop-function.html)."""
 
     dropFunction: DropFunctionAttributes
+
+
+class DropIndexAttributes(TypedDict):
+    """Permitted attributes for `DropIndex.dropIndex`."""
+
+    catalogName: Optional[str]
+    indexName: str
+    schemaName: Optional[str]
+    tableName: str
+
+
+class DropIndex(TypedDict):
+    """Permitted attributes for change
+    [dropIndex](https://docs.liquibase.com/change-types/drop-index.html)."""
+
+    dropIndex: DropIndexAttributes
+
+
+class DropPackageAttributes(TypedDict):
+    """Permitted attributes for `DropPackage.DropPackage`."""
+
+    catalogName: Optional[str]
+    packageName: str
+    schemaName: Optional[str]
+
+
+class DropPackage(TypedDict):
+    """Permitted attributes for change
+    [dropPackage](https://docs.liquibase.com/change-types/drop-package.html)."""
+
+    dropPackage: DropPackageAttributes
+
+
+class DropPackageBodyAttributes(TypedDict):
+    """Permitted attributes for `DropPackageBody.DropPackageBody`."""
+
+    catalogName: Optional[str]
+    packageBodyName: str
+    schemaName: Optional[str]
+
+
+class DropPackageBody(TypedDict):
+    """Permitted attributes for change
+    [dropPackageBody](https://docs.liquibase.com/change-types/drop-package-body.html).
+    """
+
+    dropPackageBody: DropPackageBodyAttributes
