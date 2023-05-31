@@ -427,7 +427,7 @@ class DropPackage(TypedDict):
 
 
 class DropPackageBodyAttributes(TypedDict):
-    """Permitted attributes for `DropPackageBody.DropPackageBody`."""
+    """Permitted attributes for `DropPackageBody.dropPackageBody`."""
 
     catalogName: Optional[str]
     packageBodyName: str
@@ -440,3 +440,53 @@ class DropPackageBody(TypedDict):
     """
 
     dropPackageBody: DropPackageBodyAttributes
+
+
+class DropProcedureAttributes(TypedDict):
+    """Permitted attributes for `DropProcedure.dropProcedure`."""
+
+    catalogName: Optional[str]
+    procedureName: str
+    schemaName: Optional[str]
+
+
+class DropProcedure(TypedDict):
+    """Permitted attributes for change
+    [dropProcedure](https://docs.liquibase.com/change-types/drop-procedure.html).
+    """
+
+    dropProcedure: DropProcedureAttributes
+
+
+class DropSequenceAttributes(TypedDict):
+    """Permitted attributes for `DropSequence.dropSequence`."""
+
+    catalogName: Optional[str]
+    schemaName: Optional[str]
+    sequenceName: str
+
+
+class DropSequence(TypedDict):
+    """Permitted attributes for change
+    [dropSequence](https://docs.liquibase.com/change-types/drop-sequence.html).
+    """
+
+    dropSequence: DropSequenceAttributes
+
+
+class DropSynonymAttributes(TypedDict):
+    """Permitted attributes for `DropSynonym.dropSynonym`."""
+
+    objectType: Optional[str]
+    private: Optional[bool]
+    synonymCatalogName: Optional[str]
+    synonymName: str
+    synonymSchemaName: Optional[str]
+
+
+class DropSynonym(TypedDict):
+    """Permitted attributes for change
+    [DropSynonym](https://docs.liquibase.com/change-types/drop-synonym.html).
+    """
+
+    DropSynonym: DropSynonymAttributes
