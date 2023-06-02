@@ -490,3 +490,38 @@ class DropSynonym(TypedDict):
     """
 
     DropSynonym: DropSynonymAttributes
+
+
+class DropTableAttributes(TypedDict):
+    """Permitted attributes for `DropTable.dropSequence`."""
+
+    cascadeConstraints: Optional[bool]
+    catalogName: Optional[str]
+    schemaName: Optional[str]
+    tableName: str
+
+
+class DropTable(TypedDict):
+    """Permitted attributes for change
+    [dropTable](https://docs.liquibase.com/change-types/drop-table.html).
+    """
+
+    dropTable: DropTableAttributes
+
+
+class DropTriggerAttributes(TypedDict):
+    """Permitted attributes for `DropTrigger.dropTrigger`."""
+
+    catalogName: Optional[str]
+    schemaName: Optional[str]
+    scope: Optional[str]
+    tableName: Optional[str]
+    triggerName: str
+
+
+class DropTrigger(TypedDict):
+    """Permitted attributes for change
+    [dropTrigger](https://docs.liquibase.com/change-types/drop-trigger.html).
+    """
+
+    dropTrigger: DropTriggerAttributes
