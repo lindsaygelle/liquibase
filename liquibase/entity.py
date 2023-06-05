@@ -525,3 +525,38 @@ class DropTrigger(TypedDict):
     """
 
     dropTrigger: DropTriggerAttributes
+
+
+class DropViewAttributes:
+    """Permitted attributes for `DropView.dropView`."""
+
+    catalogName: Optional[str]
+    ifExists: Optional[bool]
+    schemaName: Optional[str]
+    viewName: str
+
+
+class DropView:
+    """Permitted attributes for change
+    [dropView](https://docs.liquibase.com/change-types/drop-view.html).
+    """
+
+    dropView: DropViewAttributes
+
+
+class EnableTriggerAttributes:
+    """Permitted attributes for `EnableTrigger.enableTrigger`."""
+
+    catalogName: Optional[str]
+    schemaName: Optional[str]
+    scope: Optional[str]
+    tableName: Optional[str]
+    triggerName: str
+
+
+class EnableTrigger:
+    """Permitted attributes for change
+    [enableTrigger](https://docs.liquibase.com/change-types/enable-trigger.html).
+    """
+
+    enableTrigger: EnableTriggerAttributes
