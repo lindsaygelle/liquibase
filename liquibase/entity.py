@@ -560,3 +560,40 @@ class EnableTrigger:
     """
 
     enableTrigger: EnableTriggerAttributes
+
+
+class RenameColumnAttributes:
+    """Permitted attributes for `RenameColumn.renameColumn`."""
+
+    catalogName: Optional[str]
+    columnDataType: Optional[str]
+    newColumnName: str
+    oldColumnName: str
+    remarks: Optional[str]
+    schemaName: Optional[str]
+    tableName: Optional[str]
+
+
+class RenameColumn:
+    """Permitted attributes for change
+    [renameColumn](https://docs.liquibase.com/change-types/rename-column.html).
+    """
+
+    renameColumn: RenameColumnAttributes
+
+
+class RenameSequenceAttributes:
+    """Permitted attributes for `RenameSequence.renameSequence`."""
+
+    catalogName: Optional[str]
+    newSequenceName: str
+    oldSequenceName: str
+    schemaName: Optional[str]
+
+
+class RenameSequence:
+    """Permitted attributes for change
+    [renameSequence](https://docs.liquibase.com/change-types/rename-sequence.html).
+    """
+
+    renameSequence: RenameSequenceAttributes
