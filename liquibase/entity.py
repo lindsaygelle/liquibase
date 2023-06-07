@@ -597,3 +597,38 @@ class RenameSequence:
     """
 
     renameSequence: RenameSequenceAttributes
+
+
+class RenameTableAttributes:
+    """Permitted attributes for `RenameTable.renameTable`."""
+
+    catalogName: Optional[str]
+    newTableName: str
+    oldTableName: str
+    schemaName: Optional[str]
+
+
+class RenameTable:
+    """Permitted attributes for change
+    [renameTable](https://docs.liquibase.com/change-types/rename-table.html).
+    """
+
+    renameTable: RenameTableAttributes
+
+
+class RenameTriggerAttributes:
+    """Permitted attributes for `RenameTrigger.renameTrigger`."""
+
+    catalogName: Optional[str]
+    newTriggerName: str
+    oldTriggerName: str
+    schemaName: Optional[str]
+    tableName: Optional[str]
+
+
+class RenameTrigger:
+    """Permitted attributes for change
+    [renameTrigger](https://docs.liquibase.com/change-types/rename-trigger.html).
+    """
+
+    renameTrigger: RenameTriggerAttributes
