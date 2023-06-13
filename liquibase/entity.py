@@ -527,7 +527,7 @@ class DropTrigger(TypedDict):
     dropTrigger: DropTriggerAttributes
 
 
-class DropViewAttributes:
+class DropViewAttributes(TypedDict):
     """Permitted attributes for `DropView.dropView`."""
 
     catalogName: Optional[str]
@@ -544,7 +544,7 @@ class DropView:
     dropView: DropViewAttributes
 
 
-class EnableTriggerAttributes:
+class EnableTriggerAttributes(TypedDict):
     """Permitted attributes for `EnableTrigger.enableTrigger`."""
 
     catalogName: Optional[str]
@@ -562,7 +562,7 @@ class EnableTrigger:
     enableTrigger: EnableTriggerAttributes
 
 
-class RenameColumnAttributes:
+class RenameColumnAttributes(TypedDict):
     """Permitted attributes for `RenameColumn.renameColumn`."""
 
     catalogName: Optional[str]
@@ -574,7 +574,7 @@ class RenameColumnAttributes:
     tableName: Optional[str]
 
 
-class RenameColumn:
+class RenameColumn(TypedDict):
     """Permitted attributes for change
     [renameColumn](https://docs.liquibase.com/change-types/rename-column.html).
     """
@@ -582,7 +582,7 @@ class RenameColumn:
     renameColumn: RenameColumnAttributes
 
 
-class RenameSequenceAttributes:
+class RenameSequenceAttributes(TypedDict):
     """Permitted attributes for `RenameSequence.renameSequence`."""
 
     catalogName: Optional[str]
@@ -591,7 +591,7 @@ class RenameSequenceAttributes:
     schemaName: Optional[str]
 
 
-class RenameSequence:
+class RenameSequence(TypedDict):
     """Permitted attributes for change
     [renameSequence](https://docs.liquibase.com/change-types/rename-sequence.html).
     """
@@ -599,7 +599,7 @@ class RenameSequence:
     renameSequence: RenameSequenceAttributes
 
 
-class RenameTableAttributes:
+class RenameTableAttributes(TypedDict):
     """Permitted attributes for `RenameTable.renameTable`."""
 
     catalogName: Optional[str]
@@ -608,7 +608,7 @@ class RenameTableAttributes:
     schemaName: Optional[str]
 
 
-class RenameTable:
+class RenameTable(TypedDict):
     """Permitted attributes for change
     [renameTable](https://docs.liquibase.com/change-types/rename-table.html).
     """
@@ -616,7 +616,7 @@ class RenameTable:
     renameTable: RenameTableAttributes
 
 
-class RenameTriggerAttributes:
+class RenameTriggerAttributes(TypedDict):
     """Permitted attributes for `RenameTrigger.renameTrigger`."""
 
     catalogName: Optional[str]
@@ -626,9 +626,46 @@ class RenameTriggerAttributes:
     tableName: Optional[str]
 
 
-class RenameTrigger:
+class RenameTrigger(TypedDict):
     """Permitted attributes for change
     [renameTrigger](https://docs.liquibase.com/change-types/rename-trigger.html).
     """
 
     renameTrigger: RenameTriggerAttributes
+
+
+class RenameViewAttributes(TypedDict):
+    """Permitted attributes for `RenameTrigger.renameTrigger`."""
+
+    catalogName: Optional[str]
+    newViewName: str
+    oldViewName: str
+    schemaName: Optional[str]
+
+
+class RenameView(TypedDict):
+    """Permitted attributes for change
+    [renameView](https://docs.liquibase.com/change-types/rename-view.html).
+    """
+
+    renameView: RenameViewAttributes
+
+
+class SetColumnRemarkAttributes(TypedDict):
+    """Permitted attributes for `RenameTrigger.renameTrigger`."""
+
+    catalogName: Optional[str]
+    columnName: str
+    remarks: str
+    schemaName: Optional[str]
+    tableName: Optional[str]
+    columnDataType: Optional[str]
+    columnParentType: Optional[str]
+
+
+class SetColumnRemarks(TypedDict):
+    """Permitted attributes for change
+    [setColumnRemarks](https://docs.liquibase.com/change-types/set-column-remarks.html).
+    """
+
+    setColumnRemarks: SetColumnRemarkAttributes
