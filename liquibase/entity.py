@@ -651,7 +651,7 @@ class RenameView(TypedDict):
     renameView: RenameViewAttributes
 
 
-class SetColumnRemarkAttributes(TypedDict):
+class SetColumnRemarksAttributes(TypedDict):
     """Permitted attributes for `RenameTrigger.renameTrigger`."""
 
     catalogName: Optional[str]
@@ -668,4 +668,21 @@ class SetColumnRemarks(TypedDict):
     [setColumnRemarks](https://docs.liquibase.com/change-types/set-column-remarks.html).
     """
 
-    setColumnRemarks: SetColumnRemarkAttributes
+    setColumnRemarks: SetColumnRemarksAttributes
+
+
+class SetTableRemarksAttributes(TypedDict):
+    """Permitted attributes for `SetTableRemarks.setTableRemarks`."""
+
+    catalogName: Optional[str]
+    remarks: str
+    schemaName: Optional[str]
+    tableName: str
+
+
+class SetTableRemarks(TypedDict):
+    """Permitted attributes for change
+    [setTableRemarks](https://docs.liquibase.com/change-types/set-table-remarks.html).
+    """
+
+    setTableRemarks: SetTableRemarksAttributes
