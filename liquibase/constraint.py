@@ -168,3 +168,20 @@ class DisableCheckConstraint(TypedDict):
     """
 
     disableCheckConstraint: DisableCheckConstraintAttributes
+
+
+class DropAllForeignKeyConstraintsAttributes(TypedDict):
+    """Permitted attributes for `DropAllForeignKeyConstraints.dropAllForeignKeyConstraints`."""
+
+    baseTableCatalogName: Optional[str]
+    baseTableName: str
+    baseTableSchemaName: Optional[str]
+
+
+class DropAllForeignKeyConstraints(TypedDict):
+    # pylint: disable=C0301
+    """Permitted attributes for change
+    [dropAllForeignKeyConstraints](https://docs.liquibase.com/change-types/drop-all-foreign-key-constraints.html).
+    """
+
+    dropAllForeignKeyConstraints: DropAllForeignKeyConstraintsAttributes
