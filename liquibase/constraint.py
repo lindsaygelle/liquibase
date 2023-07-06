@@ -151,3 +151,20 @@ class AddUniqueConstraint(TypedDict):
     """
 
     addUniqueConstraint: UniqueConstraint
+
+
+class DisableCheckConstraintAttributes(TypedDict):
+    """Permitted attributes for `DisableCheckConstraint.disableCheckConstraint`."""
+
+    catalogName: Optional[str]
+    constraintName: str
+    schemaName: Optional[str]
+    tableName: str
+
+
+class DisableCheckConstraint(TypedDict):
+    """Permitted attributes for change
+    [disableCheckConstraint](https://docs.liquibase.com/change-types/disable-check-constraint.html).
+    """
+
+    disableCheckConstraint: DisableCheckConstraintAttributes
